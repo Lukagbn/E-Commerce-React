@@ -1,0 +1,38 @@
+.signUp {
+  position: absolute;
+  width: 100%;
+  font-size: 12px;
+  top: 0px;
+  text-align: center;
+  padding-block: 10px;
+  background-color: #000000;
+  color: #ffff;
+  font-family: var(--font-satoshi);
+  z-index: 10;
+  a {
+    text-decoration: underline;
+    font-weight: 500;
+  }
+}
+.navHeader {
+  display: flex;
+  align-items: center;
+  padding-block: 23px;
+  padding-inline: 16px;
+  justify-content: space-between;
+}
+.navLogo {
+  font-weight: 700;
+  font-size: 22.2px;
+  font-family: var(--font-integral);
+  line-height: 100%;
+}
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.navigation {
+  display: flex;
+  gap: 12px;
+}

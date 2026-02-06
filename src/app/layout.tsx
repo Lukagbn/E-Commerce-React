@@ -1,15 +1,47 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import localFont from "next/font/local";
+import Navbar from "@/app/components/Navbar/Navbar";
+import "./globals.scss";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const satoshi = localFont({
+  src: [
+    {
+      path: "./fonts/Satoshi-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Satoshi-medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Satoshi-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-satoshi",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const integralCF = localFont({
+  src: [
+    {
+      path: "./fonts/integralCFRegular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/integralCFMediumRegular.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/integralCFBoldRegular.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-integral",
 });
 
 export const metadata: Metadata = {
@@ -23,8 +55,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${satoshi.variable} ${integralCF.variable}`}>
+      <body className="antialiased">
+        <Navbar />
         {children}
       </body>
     </html>
