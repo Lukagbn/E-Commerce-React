@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Navbar.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import layout from "@/app/layout.module.scss";
 
 async function Navbar() {
   return (

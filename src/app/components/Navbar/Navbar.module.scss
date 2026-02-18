@@ -36,3 +36,16 @@
   display: flex;
   gap: 12px;
 }
+@media (min-width: 1400px) {
+  .logoContainer {
+    span {
+      font-size: 32px;
+    }
+    img {
+      display: none;
+    }
+  }
+}
+.navigation span {
+  display: none;
+}

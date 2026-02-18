@@ -57,56 +57,64 @@ function page() {
   return (
     <main className={layout.container}>
       <section className={styles.mainHeadingContainer}>
-        <h1 className={styles.mainHeader}>
-          FIND CLOTHES THAT MATCHES YOUR STYLE
-        </h1>
-        <p>
-          Browse through our diverse range of meticulously crafted garments,
-          designed to bring out your individuality and cater to your sense of
-          style.
-        </p>
-        <button>Shop Now</button>
-        <div className={styles.overviewContainer}>
-          <div className={styles.overviewBox}>
-            <h3>200+</h3>
-            <p>International Brands</p>
-          </div>
-          <Image
-            src={"/separateLine.png"}
-            alt="line"
-            width={1}
-            height={52}
-          ></Image>
-          <div className={styles.overviewBox}>
-            <h3>2,000+</h3>
-            <p>High-Quality Products</p>
-          </div>
-          <div className={styles.overviewBox}>
-            <h3>30,000+</h3>
-            <p>Happy Customers</p>
+        <div
+          className={`${styles.mainHeadingContainerWrapper} ${layout.innerContainer}`}
+        >
+          <div className={styles.headingWrapper}>
+            <h1 className={styles.mainHeader}>
+              FIND CLOTHES THAT MATCHES YOUR STYLE
+            </h1>
+            <p>
+              Browse through our diverse range of meticulously crafted garments,
+              designed to bring out your individuality and cater to your sense
+              of style.
+            </p>
+            <button>Shop Now</button>
+            <div className={styles.overviewContainer}>
+              <div className={styles.overviewBox}>
+                <h3>200+</h3>
+                <p>International Brands</p>
+              </div>
+              <Image
+                src={"/separateLine.png"}
+                alt="line"
+                width={1}
+                height={52}
+              ></Image>
+              <div className={styles.overviewBox}>
+                <h3>2,000+</h3>
+                <p>High-Quality Products</p>
+              </div>
+              <div className={styles.overviewBox}>
+                <h3>30,000+</h3>
+                <p>Happy Customers</p>
+              </div>
+            </div>
           </div>
           <div className={styles.imgContainer}>
-            <Image
-              className={styles.mainImage}
-              src={"/mainImage.svg"}
-              width={390}
-              height={448}
-              alt="main image"
-            ></Image>
-            <Image
-              src={"/mainStar.svg"}
-              className={styles.rightStar}
-              width={76}
-              height={76}
-              alt="star"
-            ></Image>
-            <Image
-              src={"/mainStar.svg"}
-              className={styles.leftStar}
-              width={44}
-              height={44}
-              alt="star"
-            ></Image>
+            <div className={styles.imgWrapper}>
+              <Image
+                className={styles.mainImage}
+                src={"/mainImage.svg"}
+                width={390}
+                height={448}
+                alt="main image"
+              ></Image>
+              <Image
+                src={"/mainStar.svg"}
+                className={styles.rightStar}
+                width={76}
+                height={76}
+                alt="star"
+              ></Image>
+              <Image
+                src={"/mainStar.svg"}
+                className={styles.leftStar}
+                width={44}
+                height={44}
+                alt="star"
+              ></Image>
+            </div>
           </div>
         </div>
       </section>
@@ -159,7 +167,7 @@ function page() {
         </div>
         <button>View All</button>
       </section>
-      <section className={styles.horizontalLine}>
+      <section className={`${styles.horizontalLine} ${layout.innerContainer}`}>
         <hr />
       </section>
       <section
