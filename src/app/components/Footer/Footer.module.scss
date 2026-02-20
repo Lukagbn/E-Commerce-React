@@ -61,8 +61,7 @@
   }
   .footerWrapper {
     padding-top: 179px;
-    max-width: 358px;
-    width: 100%;
+    display: grid;
     margin-inline: auto;
     .footerLogo {
       font-size: 28.85px;
@@ -126,8 +125,13 @@
       margin-top: 40px;
       background-color: rgba(0, 0, 0, 0.1);
     }
+    .rightsContainer {
+      display: grid;
+      gap: 16px;
+    }
     .rights {
       text-align: center;
+      padding-top: 0px;
       font-size: 14px;
       font-family: var(--font-satoshi);
       font-weight: 400;
@@ -135,7 +139,6 @@
     }
     .paymentContainer {
       display: flex;
-      padding-top: 16px;
       justify-content: center;
       gap: 10px;
       .paymentBox {
@@ -167,6 +170,47 @@
       top: -11%;
       form {
         grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .footerWrapper {
+      grid-template-columns: 1fr 3fr;
+      .logoBox {
+        max-width: 248px;
+      }
+      .socialContainer {
+        padding-top: 35px;
+      }
+      .footerSection {
+        grid-template-columns: repeat(4, 1fr);
+        justify-items: end;
+        h4 {
+          font-size: 16px;
+          letter-spacing: 3px;
+        }
+        a {
+          font-size: 16px;
+          line-height: 19px;
+        }
+      }
+      .footerLogo {
+        font-size: 33.45px;
+      }
+      hr {
+        grid-column: span 2;
+      }
+      p {
+        padding-top: 25px;
+        line-height: 22px;
+      }
+      .rightsContainer {
+        gap: 24px;
+        grid-column: span 2;
+        p {
+          text-align: start;
+        }
+        .paymentContainer {
+          justify-content: end;
+        }
       }
     }
   }

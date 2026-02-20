@@ -104,21 +104,23 @@ function Footer() {
           </div>
         </form>
       </div>
-      <div className={`${styles.footerWrapper} ${layout.innerContainer}`}>
-        <h2 className={styles.footerLogo}>SHOP.CO</h2>
-        <p>
-          We have clothes that suits your style and which you’re proud to wear.
-          From women to men.
-        </p>
-        <div className={styles.socialContainer}>
-          {socialList.map((item, index) => (
-            <div
-              className={`${styles.socialBox} ${item.className}`}
-              key={index}
-            >
-              <Image src={item.img} width={13} height={13} alt={item.alt} />
-            </div>
-          ))}
+      <div className={`${layout.innerContainer} ${styles.footerWrapper} `}>
+        <div className={styles.logoBox}>
+          <h2 className={styles.footerLogo}>SHOP.CO</h2>
+          <p>
+            We have clothes that suits your style and which you’re proud to
+            wear. From women to men.
+          </p>
+          <div className={styles.socialContainer}>
+            {socialList.map((item, index) => (
+              <div
+                className={`${styles.socialBox} ${item.className}`}
+                key={index}
+              >
+                <Image src={item.img} width={13} height={13} alt={item.alt} />
+              </div>
+            ))}
+          </div>
         </div>
         <div className={styles.footerSection}>
           {footerSection.map((item, index) => (
@@ -132,16 +134,18 @@ function Footer() {
             </div>
           ))}
         </div>
-        <hr />
-        <p className={styles.rights}>
-          Shop.co © 2000-{currentYear}, All Rights Reserved
-        </p>
-        <div className={styles.paymentContainer}>
-          {paymentSection.map((item, index) => (
-            <div className={styles.paymentBox} key={index}>
-              <Image src={item.img} width={27} height={10} alt={item.alt} />
-            </div>
-          ))}
+        <div className={styles.rightsContainer}>
+          <hr />
+          <p className={styles.rights}>
+            Shop.co © 2000-{currentYear}, All Rights Reserved
+          </p>
+          <div className={styles.paymentContainer}>
+            {paymentSection.map((item, index) => (
+              <div className={styles.paymentBox} key={index}>
+                <Image src={item.img} width={27} height={10} alt={item.alt} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
