@@ -1,5 +1,5 @@
-.signUp {
-  position: absolute;
+.promoBar {
+  position: fixed;
   width: 100%;
   font-size: 12px;
   top: 0px;
@@ -14,82 +14,97 @@
     font-weight: 500;
   }
 }
-.navHeader {
+.navbar {
   display: flex;
   align-items: center;
   padding-block: 23px;
   justify-content: space-between;
+  .searchInput {
+    display: none;
+  }
 }
-.navLogo {
+.logo {
   font-weight: 700;
   font-size: 22.2px;
   font-family: var(--font-integral);
   line-height: 100%;
 }
-.logoContainer {
+.brand {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.navigation {
+.burgerBtn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.nav {
   display: flex;
   gap: 12px;
-  input {
-    display: none;
-  }
 }
-.navigationList {
+.navList {
   display: none;
 }
-.iconContainer {
+.actions {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
-.dropDown {
+.dropdownTrigger {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
+  background: none;
+  color: inherit;
+  font-size: 16px;
+  font-family: var(--font-satoshi);
+  border: none;
 }
 @media (min-width: 1400px) {
-  .logoContainer {
-    span {
-      font-size: 32px;
-    }
-    img {
-      display: none;
-    }
-  }
-  .signUp {
+  .promoBar {
     font-size: 14px;
   }
-  .navigation {
-    gap: 40px;
-    .searchIcon {
-      display: none;
-    }
-    input {
-      display: block;
-      width: 577px;
-      height: 48px;
-      border-radius: 62px;
-      outline: none;
-      border: none;
-      background-color: rgba(240, 240, 240, 1);
-      color: #000000;
-      padding-left: 42px;
-      font-size: 16px;
-    }
-    .navigationList {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      li {
-        line-height: 100%;
+  .navbar {
+    .brand {
+      .burgerBtn {
+        display: none;
+      }
+      .logo {
+        font-size: 32px;
       }
     }
-    .iconContainer {
-      gap: 14px;
-      align-items: center;
+    .nav {
+      gap: 40px;
+      .searchIcon {
+        display: none;
+      }
+      .navList {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        li {
+          line-height: 100%;
+        }
+      }
+    }
+    .actions {
+      gap: 16px;
+      .searchInput {
+        display: block;
+        width: 577px;
+        height: 48px;
+        border-radius: 62px;
+        outline: none;
+        border: none;
+        background-color: rgba(240, 240, 240, 1);
+        color: #000000;
+        padding-left: 42px;
+        font-size: 16px;
+      }
+      .searchIcon {
+        display: none;
+      }
     }
   }
 }
