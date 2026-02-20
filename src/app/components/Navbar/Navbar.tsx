@@ -27,7 +27,7 @@ async function Navbar() {
         </div>
         <nav className={`${styles.navigation}`}>
           <ul className={styles.navigationList}>
-            <li>
+            <li className={styles.dropDown}>
               Shop
               <Image
                 src={"/dropDown.png"}

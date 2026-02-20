@@ -71,7 +71,6 @@
 }
 .brandContainer {
   background: rgba(0, 0, 0, 1);
-  padding-inline: 16px;
   padding-block: 40px;
   display: flex;
   height: 146px;
@@ -302,6 +301,9 @@
     }
   }
   .brandContainer {
+    height: 122px;
+    gap: unset;
+    justify-content: space-evenly;
     img:nth-of-type(1) {
       width: 166px;
       height: 33px;

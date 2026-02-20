@@ -45,6 +45,11 @@
   display: flex;
   gap: 12px;
 }
+.dropDown {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
 @media (min-width: 1400px) {
   .logoContainer {
     span {
