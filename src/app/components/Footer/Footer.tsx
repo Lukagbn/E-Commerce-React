@@ -104,7 +104,7 @@ function Footer() {
           </div>
         </form>
       </div>
-      <div className={`${layout.innerContainer} ${styles.footerWrapper} `}>
+      <div className={`${styles.footerWrapper} ${layout.innerContainer}`}>
         <div className={styles.logoBox}>
           <h2 className={styles.footerLogo}>SHOP.CO</h2>
           <p>
