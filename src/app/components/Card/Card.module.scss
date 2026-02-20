@@ -1,0 +1,50 @@
+.card {
+  max-width: 200px;
+  width: 100%;
+  p {
+    font-weight: 700;
+    color: rgba(0, 0, 0, 1);
+    line-height: 100%;
+    font-size: 13px;
+  }
+  img {
+    background: rgba(240, 238, 237, 1);
+    border-radius: 13.42px;
+  }
+  .star {
+    color: gold;
+    font-size: 18px;
+  }
+  .starRate {
+    font-size: 12px;
+    line-height: 100%;
+    color: rgba(0, 0, 0, 1);
+
+    &::after {
+      content: "/ 5";
+      color: #ababab;
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .card {
+    max-width: 295px;
+    img {
+      width: 295px;
+      height: 298px;
+    }
+    p {
+      font-size: 20px;
+    }
+    .star {
+      font-size: 20px;
+    }
+    .starRate {
+      font-size: 14px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+  }
+}

@@ -9,16 +9,13 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: #000000;
-    max-width: 358px;
-    width: 100%;
     border-radius: 20px;
     height: 293px;
     padding: 24px;
     padding-top: 32px;
     form {
-      display: flex;
+      display: grid;
       height: 100%;
-      flex-direction: column;
       justify-content: space-between;
       h2 {
         font-family: var(--font-integral);
@@ -158,6 +155,18 @@
       img {
         width: 21px;
         height: 13px;
+      }
+    }
+  }
+}
+@media (min-width: 1440px) {
+  .footer {
+    .footerForm {
+      transition: 1s ease;
+      height: 180px;
+      top: -11%;
+      form {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   }

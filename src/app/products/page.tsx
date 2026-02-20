@@ -4,6 +4,7 @@ import layout from "../layout.module.scss";
 import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Card from "../components/Card/Card";
 
 type arrivalsType = {
   id: number;
@@ -149,20 +150,13 @@ function page() {
         <h2>NEW ARRIVALS</h2>
         <div className={styles.newArrivalsContainer}>
           {arrivals?.map((item) => (
-            <div className={styles.card} key={item.id}>
-              <Image
-                src={`${item.images[0]}`}
-                width={198}
-                height={200}
-                alt="product"
-              />
-              <p>{item.title}</p>
-              <div className={styles.starContainer}>
-                <span className={styles.star}>★★★★★</span>
-                <span className={styles.starRate}> {item.rating} </span>
-              </div>
-              <h3>${item.price}</h3>
-            </div>
+            <Card
+              title={item.title}
+              price={item.price}
+              images={item.images}
+              rating={item.rating}
+              key={item.id}
+            />
           ))}
         </div>
         <button>View All</button>
@@ -176,20 +170,13 @@ function page() {
         <h2>top selling</h2>
         <div className={styles.newArrivalsContainer}>
           {topSelling?.map((item) => (
-            <div className={styles.card} key={item.id}>
-              <Image
-                src={`${item.images[0]}`}
-                width={198}
-                height={200}
-                alt="product"
-              />
-              <p>{item.title}</p>
-              <div className={styles.starContainer}>
-                <span className={styles.star}>★★★★★</span>
-                <span className={styles.starRate}> {item.rating} </span>
-              </div>
-              <h3>${item.price}</h3>
-            </div>
+            <Card
+              title={item.title}
+              price={item.price}
+              images={item.images}
+              rating={item.rating}
+              key={item.id}
+            />
           ))}
         </div>
         <button>View All</button>

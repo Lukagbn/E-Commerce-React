@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Footer.module.scss";
 import Image from "next/image";
-import { title } from "process";
+import layout from "@/app/layout.module.scss";
 import Link from "next/link";
 function Footer() {
   const socialList = [
@@ -88,7 +88,7 @@ function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerForm}>
+      <div className={`${styles.footerForm} ${layout.innerContainer}`}>
         <form>
           <h2>STAY UPTO DATE ABOUT OUR LATEST OFFERS</h2>
           <div className={styles.contentContainer}>
@@ -104,7 +104,7 @@ function Footer() {
           </div>
         </form>
       </div>
-      <div className={styles.footerWrapper}>
+      <div className={`${styles.footerWrapper} ${layout.innerContainer}`}>
         <h2 className={styles.footerLogo}>SHOP.CO</h2>
         <p>
           We have clothes that suits your style and which you’re proud to wear.
