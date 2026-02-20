@@ -18,7 +18,6 @@
   display: flex;
   align-items: center;
   padding-block: 23px;
-  padding-inline: 16px;
   justify-content: space-between;
 }
 .navLogo {
@@ -35,6 +34,16 @@
 .navigation {
   display: flex;
   gap: 12px;
+  input {
+    display: none;
+  }
+}
+.navigationList {
+  display: none;
+}
+.iconContainer {
+  display: flex;
+  gap: 12px;
 }
 @media (min-width: 1400px) {
   .logoContainer {
@@ -45,7 +54,37 @@
       display: none;
     }
   }
-}
-.navigation span {
-  display: none;
+  .signUp {
+    font-size: 14px;
+  }
+  .navigation {
+    gap: 40px;
+    .searchIcon {
+      display: none;
+    }
+    input {
+      display: block;
+      width: 577px;
+      height: 48px;
+      border-radius: 62px;
+      outline: none;
+      border: none;
+      background-color: rgba(240, 240, 240, 1);
+      color: #000000;
+      padding-left: 42px;
+      font-size: 16px;
+    }
+    .navigationList {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      li {
+        line-height: 100%;
+      }
+    }
+    .iconContainer {
+      gap: 14px;
+      align-items: center;
+    }
+  }
 }

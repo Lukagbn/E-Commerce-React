@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#future components
+/src/app/components/ProductSection
+/src/app/components/CategorySection
