@@ -188,45 +188,47 @@ function page() {
           <h2>
             BROWSE BY <span>dress STYLE</span>
           </h2>
-          <div className={styles.categoriesBox}>
-            <Link href={"#"}>
-              <Image
-                src={"/casual.webp"}
-                width={310}
-                height={190}
-                alt="categories casual"
-              />
-            </Link>
-          </div>
-          <div className={styles.categoriesBox}>
-            <Link href={"#"}>
-              <Image
-                src={"/formal.webp"}
-                width={310}
-                height={190}
-                alt="categories formal"
-              />
-            </Link>
-          </div>
-          <div className={styles.categoriesBox}>
-            <Link href={"#"}>
-              <Image
-                src={"/party.webp"}
-                width={310}
-                height={190}
-                alt="categories party"
-              />
-            </Link>
-          </div>
-          <div className={styles.categoriesBox}>
-            <Link href={"#"}>
-              <Image
-                src={"/gym.webp"}
-                width={310}
-                height={190}
-                alt="categories gym"
-              />
-            </Link>
+          <div className={styles.categoriesWrapper}>
+            <div className={styles.categoriesBox}>
+              <Link href={"#"}>
+                <Image
+                  src={"/casual.webp"}
+                  width={310}
+                  height={190}
+                  alt="categories casual"
+                />
+              </Link>
+            </div>
+            <div className={styles.categoriesBox}>
+              <Link href={"#"}>
+                <Image
+                  src={"/formal.webp"}
+                  width={310}
+                  height={190}
+                  alt="categories formal"
+                />
+              </Link>
+            </div>
+            <div className={styles.categoriesBox}>
+              <Link href={"#"}>
+                <Image
+                  src={"/party.webp"}
+                  width={310}
+                  height={190}
+                  alt="categories party"
+                />
+              </Link>
+            </div>
+            <div className={styles.categoriesBox}>
+              <Link href={"#"}>
+                <Image
+                  src={"/gym.webp"}
+                  width={310}
+                  height={190}
+                  alt="categories gym"
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

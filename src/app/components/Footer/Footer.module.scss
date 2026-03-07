@@ -6,13 +6,13 @@
   .footerTop {
     position: absolute;
     top: -17%;
-    left: 50%;
-    transform: translateX(-50%);
     background-color: #000000;
     border-radius: 20px;
     height: 293px;
     padding: 24px;
     padding-top: 32px;
+    left: 16px;
+    right: 16px;
     .newsletterForm {
       display: grid;
       height: 100%;
@@ -63,7 +63,6 @@
   .footerMain {
     padding-top: 179px;
     display: grid;
-    margin-inline: auto;
     .footerBrand {
       .footerlogo {
         font-size: 28.85px;
@@ -157,11 +156,37 @@
           }
         }
       }
-      .paymentContainer .paymentItem:nth-of-type(2) {
+      .paymentMethods .paymentItem:nth-of-type(2) {
         img {
           width: 21px;
           height: 13px;
         }
+      }
+    }
+  }
+}
+@media (min-width: 800px) {
+  .footer {
+    padding-inline: 16px;
+    .footerTop {
+      max-width: 1240px;
+      height: 200px;
+      .newsletterForm {
+        grid-template-columns: 1.6fr 1fr;
+        align-items: center;
+        h2 {
+          max-width: 551px;
+          font-size: 40px;
+          line-height: 45px;
+        }
+      }
+    }
+    .footerMain {
+      max-width: 1240px;
+      padding-inline: 0;
+      margin-inline: auto;
+      .footerNav {
+        grid-template-columns: repeat(4, 1fr);
       }
     }
   }
