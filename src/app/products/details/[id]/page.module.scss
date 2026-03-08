@@ -1,0 +1,29 @@
+.productGallery {
+  .productDetails {
+    .productImages {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+      align-items: center;
+      img {
+        background-color: #f0eeed;
+        border-radius: 20px;
+        display: block;
+      }
+      .activeImage {
+        border: 1px solid black;
+      }
+      .productThumbnails {
+        display: flex;
+        gap: 12px;
+      }
+    }
+  }
+  .productInfo {
+    margin-top: 20px;
+    h1 {
+      font-size: 24px;
+      font-family: var(--font-integral);
+    }
+  }
+}

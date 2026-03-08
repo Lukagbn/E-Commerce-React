@@ -105,18 +105,24 @@
     font-weight: 700;
     font-size: 20px;
   }
-}
-.newArrivalsContainer {
-  display: flex;
-  overflow-x: scroll;
-  margin-top: 32px;
-  margin-inline: auto;
-  gap: 16px;
+  .newArrivalsWrapper {
+    overflow-x: auto;
+    width: 100%;
+    scrollbar-width: none;
+    .newArrivalsContainer {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      padding-inline: 16px;
+      width: max-content;
+      margin-inline: auto;
 
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
   }
 }
 .card {

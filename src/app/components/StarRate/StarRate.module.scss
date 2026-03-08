@@ -1,0 +1,23 @@
+.star {
+  position: relative;
+  display: inline-block;
+  .starInner {
+    color: gold;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    font-size: 20px;
+  }
+  .starOuter {
+    color: #cccc;
+    font-size: 20px;
+  }
+}
+.starRate {
+  margin-left: 16px;
+  ::after {
+    content: "/5";
+    color: #0000004d;
+  }
+}

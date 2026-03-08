@@ -23,7 +23,7 @@ async function Navbar() {
               alt="burger icon"
             />
           </button>
-          <Link href={"#"}>
+          <Link href={"/products"}>
             <span className={styles.logo}>SHOP.CO</span>
           </Link>
         </div>

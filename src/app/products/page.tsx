@@ -45,7 +45,6 @@ function page() {
       (product: reviewsType) => product.reviews,
     );
     setReviews(allReviews);
-    console.log(allReviews);
     setArrivals(arrivalsData.products);
     settopSelling(topSellingData.products);
   };
@@ -146,40 +145,44 @@ function page() {
           alt="calvin klein"
         ></Image>
       </section>
-      <section className={`${styles.newArrivals} ${layout.innerContainer}`}>
-        <h2>NEW ARRIVALS</h2>
-        <div className={styles.newArrivalsContainer}>
-          {arrivals?.map((item) => (
-            <Card
-              title={item.title}
-              price={item.price}
-              images={item.images}
-              rating={item.rating}
-              key={item.id}
-            />
-          ))}
+      <section className={styles.newArrivals}>
+        <h2 className={layout.innerContainer}>NEW ARRIVALS</h2>
+        <div className={styles.newArrivalsWrapper}>
+          <div className={styles.newArrivalsContainer}>
+            {arrivals?.map((item) => (
+              <Card
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                images={item.images}
+                rating={item.rating}
+                key={item.id}
+              />
+            ))}
+          </div>
         </div>
-        <button>View All</button>
+        <button className={layout.innerContainer}>View All</button>
       </section>
       <section className={`${styles.horizontalLine} ${layout.innerContainer}`}>
         <hr />
       </section>
-      <section
-        className={`${styles.newArrivals} ${styles.topSelling} ${layout.innerContainer}`}
-      >
+      <section className={`${styles.newArrivals} ${styles.topSelling}`}>
         <h2>top selling</h2>
-        <div className={styles.newArrivalsContainer}>
-          {topSelling?.map((item) => (
-            <Card
-              title={item.title}
-              price={item.price}
-              images={item.images}
-              rating={item.rating}
-              key={item.id}
-            />
-          ))}
+        <div className={styles.newArrivalsWrapper}>
+          <div className={styles.newArrivalsContainer}>
+            {topSelling?.map((item) => (
+              <Card
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                images={item.images}
+                rating={item.rating}
+                key={item.id}
+              />
+            ))}
+          </div>
         </div>
-        <button>View All</button>
+        <button className={layout.innerContainer}>View All</button>
       </section>
       <section
         className={`${styles.browseCategories} ${layout.innerContainer}`}
