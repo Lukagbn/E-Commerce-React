@@ -3,11 +3,12 @@ import styles from "./StarRate.module.scss";
 
 type starType = {
   rating: number;
+  className?: string;
 };
 
-function StarRate({ rating }: starType) {
+function StarRate({ rating, className }: starType) {
   return (
-    <div className={styles.starContainer}>
+    <div className={`${styles.starContainer} ${className}`}>
       <div className={styles.star}>
         <span
           className={styles.starInner}

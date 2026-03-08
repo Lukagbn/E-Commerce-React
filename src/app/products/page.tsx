@@ -5,6 +5,7 @@ import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Card from "../components/Card/Card";
+import StarRate from "../components/StarRate/StarRate";
 
 type arrivalsType = {
   id: number;
@@ -51,6 +52,9 @@ function page() {
   useEffect(() => {
     arrivalfetch();
   }, []);
+  // useEffect(() => {
+  //   console.log(reviews.filter((review) => review.rating > 3));
+  // }, [reviews]);
   if (!arrivals) {
     return <div>Loading...</div>;
   }
@@ -263,7 +267,7 @@ function page() {
           <div className={styles.reviewsWrapper}>
             {reviews.map((review, index) => (
               <div key={index} className={styles.reviewCard}>
-                <span className={styles.stars}>★★★★★</span>
+                <StarRate rating={review.rating} />
                 <h4>
                   {review.reviewerName}{" "}
                   <Image

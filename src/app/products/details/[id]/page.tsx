@@ -11,6 +11,10 @@ type singleProductType = {
   title: string;
   rating: number;
   images: string[];
+  price: number;
+  discountPercentage: number;
+  description: string;
+  tags: string[];
 };
 
 function page() {
@@ -44,7 +48,7 @@ function page() {
             ) : (
               <Image
                 className={styles.productPreview}
-                src={singleProduct.images[2]}
+                src={singleProduct.images[activeImage]}
                 width={358}
                 height={290}
                 alt="image"
@@ -68,7 +72,28 @@ function page() {
           </div>
           <div className={styles.productInfo}>
             <h1>{singleProduct.title}</h1>
-            <StarRate rating={singleProduct.rating} />
+            <StarRate rating={singleProduct.rating} className={styles.star} />
+            <div className={styles.priceContainer}>
+              <span className={styles.dicountedPrice}>
+                $
+                {(
+                  singleProduct.price -
+                  (singleProduct.price * singleProduct.discountPercentage) / 100
+                ).toFixed(2)}
+              </span>
+              <span className={styles.originalPrice}>
+                ${singleProduct.price}
+              </span>
+              <span className={styles.discountPercentage}>
+                {singleProduct.discountPercentage}%
+              </span>
+            </div>
+            <p className={styles.description}>{singleProduct.description}</p>
+            <hr />
+            <h4>tags</h4>
+            {singleProduct.tags.map((tag, index) => (
+              <div key={index}>{tag}</div>
+            ))}
           </div>
         </div>
       </section>

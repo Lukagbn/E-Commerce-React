@@ -20,10 +20,72 @@
     }
   }
   .productInfo {
+    .star {
+      margin-block: 12px;
+    }
     margin-top: 20px;
     h1 {
       font-size: 24px;
       font-family: var(--font-integral);
+    }
+    .priceContainer {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      .dicountedPrice {
+        font-weight: 700;
+        font-size: 24px;
+      }
+      .originalPrice {
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 24px;
+        line-height: 100%;
+        text-decoration: line-through;
+        color: #0000004d;
+      }
+      .discountPercentage {
+        color: #ff3333;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 100%;
+        background-color: #ff33331a;
+        padding: 9px 12px;
+        border-radius: 62px;
+      }
+    }
+  }
+  .description {
+    margin-block: 24px;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+    opacity: 0.6;
+  }
+}
+@media (min-width: 1200px) {
+  .productGallery {
+    .productDetails {
+      display: flex;
+      justify-content: space-between;
+      .productImages {
+        flex-direction: row-reverse;
+        & > img {
+          width: 100%;
+          max-width: 370px;
+          height: 530px;
+        }
+        .productThumbnails {
+          flex-direction: column;
+          img {
+            width: 152px;
+            height: 167px;
+          }
+        }
+      }
+      .productInfo {
+        max-width: 600px;
+      }
     }
   }
 }

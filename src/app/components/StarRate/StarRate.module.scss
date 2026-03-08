@@ -16,7 +16,8 @@
 }
 .starRate {
   margin-left: 16px;
-  ::after {
+  font-size: 14px;
+  &::after {
     content: "/5";
     color: #0000004d;
   }
