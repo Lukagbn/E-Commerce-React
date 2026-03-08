@@ -90,10 +90,25 @@ function page() {
             </div>
             <p className={styles.description}>{singleProduct.description}</p>
             <hr />
-            <h4>tags</h4>
-            {singleProduct.tags.map((tag, index) => (
-              <div key={index}>{tag}</div>
-            ))}
+            <div className={styles.tagContainer}>
+              <p>Tags</p>
+              <div className={styles.tagContent}>
+                {singleProduct.tags.map((tag, index) => (
+                  <div className={styles.tagBox} key={index}>
+                    {tag}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <hr />
+            <div className={styles.addToCart}>
+              <div className={styles.cartQuantity}>
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
+              <button className={styles.addToCartBtn}>Add to Cart</button>
+            </div>
           </div>
         </div>
       </section>
