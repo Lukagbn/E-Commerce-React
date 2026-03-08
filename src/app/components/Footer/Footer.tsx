@@ -141,7 +141,7 @@ function Footer() {
         </div>
         <div className={styles.footerBottom}>
           <hr />
-          <p className={styles.rights}>
+          <p className={styles.rights} suppressHydrationWarning>
             Shop.co © 2000-{currentYear}, All Rights Reserved
           </p>
           <div className={styles.paymentMethods}>
