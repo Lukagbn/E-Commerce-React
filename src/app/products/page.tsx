@@ -2,7 +2,7 @@
 import Image from "next/image";
 import layout from "../layout.module.scss";
 import styles from "./page.module.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Card from "../components/Card/Card";
 import StarRate from "../components/StarRate/StarRate";
@@ -22,6 +22,7 @@ function page() {
   const [arrivals, setArrivals] = useState<CardProps[] | null>(null);
   const [topSelling, settopSelling] = useState<CardProps[] | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
   const arrivalfetch = async () => {
     const arrivalsResponse = await fetch(
       "https://dummyjson.com/products?limit=4&skip=4&select=title,images,price,rating",
@@ -42,6 +43,35 @@ function page() {
     setArrivals(arrivalsData.products);
     settopSelling(topSellingData.products);
   };
+  function scrollLeft() {
+    if (!containerRef.current) return;
+    const isAtStart = containerRef.current.scrollLeft === 0;
+    if (isAtStart) {
+      containerRef.current.scrollTo({
+        left: containerRef.current.scrollWidth,
+        behavior: "smooth",
+      });
+    } else {
+      containerRef.current.scrollBy({
+        left: -500,
+        behavior: "smooth",
+      });
+    }
+  }
+  function scrollRight() {
+    if (!containerRef.current) return;
+    const isAtEnd =
+      containerRef.current.scrollLeft + containerRef.current?.offsetWidth >=
+      containerRef.current.scrollWidth;
+    if (isAtEnd) {
+      containerRef.current.scrollTo({
+        left: -containerRef.current.scrollWidth,
+        behavior: "smooth",
+      });
+    } else {
+      containerRef.current.scrollBy({ left: 500, behavior: "smooth" });
+    }
+  }
   useEffect(() => {
     arrivalfetch();
   }, []);
@@ -209,7 +239,7 @@ function page() {
               OUR HAPPY <span>CUSTOMERS</span>
             </h2>
             <div className={styles.feedBackBtnContainer}>
-              <button className={styles.arrowBtn}>
+              <button className={styles.arrowBtn} onClick={() => scrollLeft()}>
                 <Image
                   src={"/arrowLeft.svg"}
                   width={24}
@@ -217,7 +247,7 @@ function page() {
                   alt="arrow left"
                 />
               </button>
-              <button className={styles.arrowBtn}>
+              <button className={styles.arrowBtn} onClick={() => scrollRight()}>
                 <Image
                   src={"/arrowRight.svg"}
                   width={24}
@@ -227,7 +257,7 @@ function page() {
               </button>
             </div>
           </div>
-          <div className={styles.reviewsWrapper}>
+          <div className={styles.reviewsWrapper} ref={containerRef}>
             {reviews.map((review, index) => (
               <div key={index} className={styles.reviewCard}>
                 <StarRate ratingNumber={false} rating={review.rating} />

@@ -24,6 +24,17 @@ interface singleProductType extends reviewsType {
   discountPercentage: number;
   description: string;
   tags: string[];
+  brand: string;
+  sku: string;
+  weight: number;
+  dimensions: {
+    width: number;
+    height: number;
+    depth: number;
+  };
+  warrantyInformation: string;
+  shippingInformation: string;
+  availabilityStatus: string;
   reviews: reviewsType[];
 }
 
@@ -157,6 +168,15 @@ function page() {
           {activeIndex === 0 && (
             <div className={styles.tabPanel}>
               <h3>details</h3>
+              <p>{singleProduct.brand}</p>
+              <p>{singleProduct.sku}</p>
+              <p>{singleProduct.weight}</p>
+              <p>{singleProduct.dimensions.depth}</p>
+              <p>{singleProduct.dimensions.height}</p>
+              <p>{singleProduct.dimensions.width}</p>
+              <p>{singleProduct.warrantyInformation}</p>
+              <p>{singleProduct.shippingInformation}</p>
+              <p>{singleProduct.availabilityStatus}</p>
             </div>
           )}
           {activeIndex === 1 && (
