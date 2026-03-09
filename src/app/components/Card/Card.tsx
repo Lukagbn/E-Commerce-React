@@ -4,7 +4,7 @@ import styles from "./Card.module.scss";
 import Link from "next/link";
 import StarRate from "../StarRate/StarRate";
 
-type CardProps = {
+export type CardProps = {
   id: number;
   title: string;
   price: number;

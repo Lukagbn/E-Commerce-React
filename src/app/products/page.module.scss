@@ -72,58 +72,12 @@
   background: rgba(0, 0, 0, 1);
   padding-block: 40px;
   display: flex;
-  height: 146px;
+  min-height: 146px;
   flex-wrap: wrap;
   column-gap: 34px;
   row-gap: 20px;
   align-items: center;
   justify-content: center;
-}
-.newArrivals {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  h2 {
-    font-family: var(--font-integral);
-    color: rgba(0, 0, 0, 1);
-    font-size: 32px;
-    line-height: 100%;
-    text-align: center;
-  }
-  button {
-    width: 100%;
-    height: 46px;
-    margin-top: 24px;
-    border-radius: 62px;
-    background-color: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: rgba(0, 0, 0, 1);
-    font-size: 14px;
-    font-weight: 500;
-  }
-  h3 {
-    font-weight: 700;
-    font-size: 20px;
-  }
-  .newArrivalsWrapper {
-    overflow-x: auto;
-    width: 100%;
-    scrollbar-width: none;
-    .newArrivalsContainer {
-      display: flex;
-      gap: 16px;
-      margin-top: 32px;
-      padding-inline: 16px;
-      width: max-content;
-      margin-inline: auto;
-
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-  }
 }
 .card {
   max-width: 200px;
@@ -295,13 +249,6 @@
     max-width: 1240px;
     margin-inline: auto;
   }
-  .newArrivals {
-    button {
-      width: 17.3%;
-      align-self: center;
-      margin-top: 36px;
-    }
-  }
 }
 @media (min-width: 1440px) {
   .mainHeadingContainer {
@@ -360,7 +307,7 @@
     }
   }
   .brandContainer {
-    height: 122px;
+    min-height: 122px;
     gap: unset;
     justify-content: space-evenly;
     img:nth-of-type(1) {
@@ -382,34 +329,6 @@
     img:nth-of-type(5) {
       width: 206px;
       height: 33px;
-    }
-  }
-  .newArrivals {
-    margin-top: 72px;
-    h2 {
-      font-size: 48px;
-    }
-    .newArrivalsContainer {
-      gap: 20px;
-      .card {
-        max-width: 295px;
-        img {
-          width: 295px;
-          height: 298px;
-        }
-        p {
-          font-size: 20px;
-        }
-        .star {
-          font-size: 20px;
-        }
-        .starRate {
-          font-size: 14px;
-        }
-        h3 {
-          font-size: 24px;
-        }
-      }
     }
   }
   .topSelling {

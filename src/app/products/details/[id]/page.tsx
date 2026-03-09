@@ -6,7 +6,14 @@ import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
 import StarRate from "@/app/components/StarRate/StarRate";
 
-type singleProductType = {
+interface reviewsType {
+  rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
+  reviewerEmail: string;
+}
+interface singleProductType extends reviewsType {
   id: string;
   title: string;
   rating: number;
@@ -15,7 +22,8 @@ type singleProductType = {
   discountPercentage: number;
   description: string;
   tags: string[];
-};
+  reviews: reviewsType[];
+}
 
 function page() {
   const { id } = useParams();
@@ -23,11 +31,16 @@ function page() {
     null,
   );
   const [activeImage, setActiveImage] = useState<number>(2);
+  const [activeIndex, setActiveIndex] = useState<number>(1);
+  const buttons = ["Product Details", "Rating & Reviews", "FAQs"];
   const fetchSingleProduct = async () => {
     const res = await fetch(`https://dummyjson.com/products/${id}`);
     const result: singleProductType = await res.json();
     setSingleProduct(result);
   };
+  function changeActivePanel(index: number) {
+    setActiveIndex(index);
+  }
   useEffect(() => {
     fetchSingleProduct();
   }, []);
@@ -110,6 +123,51 @@ function page() {
               <button className={styles.addToCartBtn}>Add to Cart</button>
             </div>
           </div>
+        </div>
+      </section>
+      <section className={`${styles.productTabs} ${layout.innerContainer}`}>
+        <div className={styles.taButtons}>
+          {buttons.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => changeActivePanel(index)}
+              className={`${activeIndex === index ? styles.taButtonActive : styles.taButton}`}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+        <hr />
+        <div className={styles.tabContent}>
+          {activeIndex === 0 && (
+            <div className={styles.tabPanel}>
+              <h3>details</h3>
+            </div>
+          )}
+          {activeIndex === 1 && (
+            <div className={styles.tabPanel}>
+              <h3>
+                all reviews<span>({singleProduct.reviews.length})</span>
+              </h3>
+              <div className={styles.reviewContainer}>
+                {singleProduct.reviews.map((review, index) => (
+                  <div key={index} className={styles.reviewCard}>
+                    <StarRate rating={review.rating} />
+                    <h4>{review.reviewerName}</h4>
+                    <p>{review.comment}</p>
+                    <span className={styles.postDate}>
+                      Posted on {review.date}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {activeIndex === 2 && (
+            <div className={styles.tabPanel}>
+              <h3>fAQs</h3>
+            </div>
+          )}
         </div>
       </section>
     </main>

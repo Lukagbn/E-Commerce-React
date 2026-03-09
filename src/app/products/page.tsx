@@ -6,16 +6,9 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Card from "../components/Card/Card";
 import StarRate from "../components/StarRate/StarRate";
+import ProductCard from "../components/ProductCard/ProductCard";
+import { CardProps } from "../components/Card/Card";
 
-type arrivalsType = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  rating: number;
-  images: string[];
-};
 type reviewsType = {
   id: number;
   reviews: string[];
@@ -26,8 +19,8 @@ type Review = {
   rating: number;
 };
 function page() {
-  const [arrivals, setArrivals] = useState<arrivalsType[] | null>(null);
-  const [topSelling, settopSelling] = useState<arrivalsType[] | null>(null);
+  const [arrivals, setArrivals] = useState<CardProps[] | null>(null);
+  const [topSelling, settopSelling] = useState<CardProps[] | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const arrivalfetch = async () => {
     const arrivalsResponse = await fetch(
@@ -149,45 +142,11 @@ function page() {
           alt="calvin klein"
         ></Image>
       </section>
-      <section className={styles.newArrivals}>
-        <h2 className={layout.innerContainer}>NEW ARRIVALS</h2>
-        <div className={styles.newArrivalsWrapper}>
-          <div className={styles.newArrivalsContainer}>
-            {arrivals?.map((item) => (
-              <Card
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                images={item.images}
-                rating={item.rating}
-                key={item.id}
-              />
-            ))}
-          </div>
-        </div>
-        <button className={layout.innerContainer}>View All</button>
-      </section>
+      <ProductCard cards={arrivals} />
       <section className={`${styles.horizontalLine} ${layout.innerContainer}`}>
         <hr />
       </section>
-      <section className={`${styles.newArrivals} ${styles.topSelling}`}>
-        <h2>top selling</h2>
-        <div className={styles.newArrivalsWrapper}>
-          <div className={styles.newArrivalsContainer}>
-            {topSelling?.map((item) => (
-              <Card
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                images={item.images}
-                rating={item.rating}
-                key={item.id}
-              />
-            ))}
-          </div>
-        </div>
-        <button className={layout.innerContainer}>View All</button>
-      </section>
+      <ProductCard cards={topSelling} className="topSelling" />
       <section
         className={`${styles.browseCategories} ${layout.innerContainer}`}
       >
