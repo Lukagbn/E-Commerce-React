@@ -6,13 +6,14 @@ import { CardProps } from "../Card/Card";
 
 type productCard = {
   className?: string;
+  title: string;
   cards: CardProps[] | null;
 };
 
-function ProductCard({ className, cards }: productCard) {
+function ProductCard({ className, title, cards }: productCard) {
   return (
     <section className={`${styles.newArrivals} ${className}`}>
-      <h2>top selling</h2>
+      <h2>{title}</h2>
       <div className={styles.newArrivalsWrapper}>
         <div className={styles.newArrivalsContainer}>
           {cards?.map((item) => (

@@ -83,6 +83,7 @@
           border-radius: 62px;
           padding: 10px 20px;
           font-weight: 500;
+          text-transform: capitalize;
           font-size: 14px;
           transition: 0.4s ease-in-out;
           &:hover {
@@ -204,6 +205,19 @@
     }
   }
 }
+@media (min-width: 800px) {
+  .productTabs {
+    .tabContent {
+      .tabPanel {
+        .reviewContainer {
+          width: 100%;
+          justify-content: space-between;
+          flex-direction: row;
+        }
+      }
+    }
+  }
+}
 @media (min-width: 1200px) {
   .productGallery {
     .productDetails {
@@ -237,6 +251,64 @@
           width: 100%;
           justify-content: space-between;
           flex-direction: row;
+          flex-wrap: wrap;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1440px) {
+  .productGallery {
+    .productDetails {
+      .productImages {
+        .productPreview {
+          max-width: 444px;
+        }
+      }
+      .productInfo {
+        margin-top: 0;
+        h1 {
+          font-size: 40px;
+        }
+        .star {
+          span {
+            font-size: 24px;
+          }
+        }
+        .priceContainer {
+          gap: 12px;
+          .dicountedPrice {
+            font-size: 32px;
+          }
+          .originalPrice {
+            font-size: 32px;
+          }
+          .discountPercentage {
+            font-size: 16px;
+          }
+        }
+        .description {
+          font-size: 16px;
+        }
+        .tagContainer {
+          .tagContent {
+            .tagBox {
+              padding: 12px 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .productTabs {
+    .tabContent {
+      .tabPanel {
+        .reviewContainer {
+          flex-wrap: wrap;
+          .reviewCard {
+            max-width: 610px;
+            flex-shrink: 0;
+          }
         }
       }
     }

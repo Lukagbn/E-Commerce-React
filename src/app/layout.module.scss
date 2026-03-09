@@ -6,7 +6,7 @@
   padding-inline: 16px;
   margin-inline: auto;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .innerContainer {
     max-width: 1240px;
   }
@@ -16,6 +16,6 @@
     max-width: 100%;
   }
   .innerContainer {
-    max-width: 1240px;
+    padding-inline: 0;
   }
 }

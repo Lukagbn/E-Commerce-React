@@ -4,9 +4,10 @@ import styles from "./StarRate.module.scss";
 type starType = {
   rating: number;
   className?: string;
+  ratingNumber: boolean;
 };
 
-function StarRate({ rating, className }: starType) {
+function StarRate({ rating, ratingNumber, className }: starType) {
   return (
     <div className={`${styles.starContainer} ${className}`}>
       <div className={styles.star}>
@@ -18,7 +19,9 @@ function StarRate({ rating, className }: starType) {
         </span>
         <span className={styles.starOuter}>★★★★★</span>
       </div>
-      <span className={styles.starRate}>{rating}</span>
+      {ratingNumber == true && (
+        <span className={styles.starRate}>{rating}</span>
+      )}
     </div>
   );
 }

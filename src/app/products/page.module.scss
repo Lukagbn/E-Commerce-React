@@ -210,10 +210,8 @@
 }
 @media (min-width: 600px) {
   .browseCategories {
-    padding-inline: 0;
     max-width: 1240px;
     .categoriesContainer {
-      margin-inline: 16px;
       .categoriesWrapper {
         display: grid;
         grid-template-columns: 0.5fr 0.5fr 0.5fr;

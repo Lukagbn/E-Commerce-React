@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
 import StarRate from "@/app/components/StarRate/StarRate";
+import ProductCard from "@/app/components/ProductCard/ProductCard";
+import { CardProps } from "@/app/components/Card/Card";
 
 interface reviewsType {
   rating: number;
@@ -30,6 +32,7 @@ function page() {
   const [singleProduct, setSingleProduct] = useState<singleProductType | null>(
     null,
   );
+  const [cardProducts, setcardProducts] = useState<CardProps[] | null>(null);
   const [activeImage, setActiveImage] = useState<number>(2);
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const buttons = ["Product Details", "Rating & Reviews", "FAQs"];
@@ -38,11 +41,19 @@ function page() {
     const result: singleProductType = await res.json();
     setSingleProduct(result);
   };
+  const fetchProductCards = async () => {
+    const res = await fetch(
+      "https://dummyjson.com/products?limit=4&skip=5&select=id,title,price,rating,images",
+    );
+    const result = await res.json();
+    setcardProducts(result.products);
+  };
   function changeActivePanel(index: number) {
     setActiveIndex(index);
   }
   useEffect(() => {
     fetchSingleProduct();
+    fetchProductCards();
   }, []);
   if (!singleProduct) return <p>Loading...</p>;
   return (
@@ -85,7 +96,11 @@ function page() {
           </div>
           <div className={styles.productInfo}>
             <h1>{singleProduct.title}</h1>
-            <StarRate rating={singleProduct.rating} className={styles.star} />
+            <StarRate
+              ratingNumber={true}
+              rating={singleProduct.rating}
+              className={styles.star}
+            />
             <div className={styles.priceContainer}>
               <span className={styles.dicountedPrice}>
                 $
@@ -152,7 +167,7 @@ function page() {
               <div className={styles.reviewContainer}>
                 {singleProduct.reviews.map((review, index) => (
                   <div key={index} className={styles.reviewCard}>
-                    <StarRate rating={review.rating} />
+                    <StarRate ratingNumber={false} rating={review.rating} />
                     <h4>{review.reviewerName}</h4>
                     <p>{review.comment}</p>
                     <span className={styles.postDate}>
@@ -170,6 +185,7 @@ function page() {
           )}
         </div>
       </section>
+      <ProductCard title="top selling" cards={cardProducts} />
     </main>
   );
 }

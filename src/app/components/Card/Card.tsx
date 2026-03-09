@@ -19,7 +19,7 @@ function Card({ title, price, rating, images, id }: CardProps) {
         <Image src={`${images[0]}`} width={198} height={200} alt="product" />
       </Link>
       <p>{title}</p>
-      <StarRate rating={rating} />
+      <StarRate ratingNumber={true} rating={rating} />
       <h3>${price}</h3>
     </div>
   );

@@ -142,11 +142,15 @@ function page() {
           alt="calvin klein"
         ></Image>
       </section>
-      <ProductCard cards={arrivals} />
+      <ProductCard title="new arrivals" cards={arrivals} />
       <section className={`${styles.horizontalLine} ${layout.innerContainer}`}>
         <hr />
       </section>
-      <ProductCard cards={topSelling} className="topSelling" />
+      <ProductCard
+        title="top selling"
+        cards={topSelling}
+        className="topSelling"
+      />
       <section
         className={`${styles.browseCategories} ${layout.innerContainer}`}
       >
@@ -226,7 +230,7 @@ function page() {
           <div className={styles.reviewsWrapper}>
             {reviews.map((review, index) => (
               <div key={index} className={styles.reviewCard}>
-                <StarRate rating={review.rating} />
+                <StarRate ratingNumber={false} rating={review.rating} />
                 <h4>
                   {review.reviewerName}{" "}
                   <Image
