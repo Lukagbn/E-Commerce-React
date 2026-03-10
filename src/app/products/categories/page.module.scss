@@ -41,6 +41,9 @@
   justify-items: center;
   gap: 14px;
   max-width: 390px;
+  .categoryCard {
+    max-width: 100%;
+  }
 }
 .overlay {
   position: absolute;
@@ -170,7 +173,7 @@
     .cardContainer {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      max-width: 925px;
+      max-width: 100%;
       gap: 20px;
     }
   }

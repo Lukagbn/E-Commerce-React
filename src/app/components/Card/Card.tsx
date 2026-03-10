@@ -10,11 +10,12 @@ export type CardProps = {
   price: number;
   rating: number;
   images: string[];
+  className?: string;
 };
 
-function Card({ title, price, rating, images, id }: CardProps) {
+function Card({ id, title, price, rating, images, className }: CardProps) {
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${className}`}>
       <Link href={`/products/details/${id}`}>
         <Image src={`${images[0]}`} width={198} height={200} alt="product" />
       </Link>

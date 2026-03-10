@@ -30,15 +30,7 @@ async function Navbar() {
         <nav className={`${styles.nav}`}>
           <ul className={styles.navList}>
             <li className={styles.dropDown}>
-              <button className={styles.dropdownTrigger}>
-                Shop
-                <Image
-                  src="/dropDown.png"
-                  width={16}
-                  height={16}
-                  alt="drop down"
-                />
-              </button>
+              <Link href={"/products/categories"}>Shop</Link>
             </li>
             <li>
               <Link href={"#"}>On Sale</Link>

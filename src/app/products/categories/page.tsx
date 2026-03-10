@@ -125,6 +125,7 @@ function page() {
                     price={card.price}
                     rating={card.rating}
                     images={card.images}
+                    className={styles.categoryCard}
                   />
                 ))}
             </div>

@@ -179,7 +179,7 @@ function page() {
       <ProductCard
         title="top selling"
         cards={topSelling}
-        className="topSelling"
+        className={styles.topSelling}
       />
       <section
         className={`${styles.browseCategories} ${layout.innerContainer}`}
