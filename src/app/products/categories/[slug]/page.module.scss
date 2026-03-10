@@ -1,9 +1,16 @@
-.categoryHeader {
-  display: flex;
+.categoryContainer {
   max-width: 390px;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
+  width: 100%;
+  margin-inline: auto;
+  .categoryHeader {
+    display: flex;
+    max-width: 390px;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 29px;
+    text-transform: capitalize;
+  }
 }
 .cardContainer {
   display: grid;
@@ -12,12 +19,16 @@
   gap: 14px;
   max-width: 390px;
 }
-.aside {
-  display: none;
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background-color: #000000;
+  opacity: 0.6;
 }
-.asideActive {
+.asideBase {
   max-width: 390px;
-  display: block;
   padding: 18px;
   position: fixed;
   bottom: 0%;
@@ -29,19 +40,22 @@
   background-color: #ffff;
   width: 100%;
   z-index: 11;
+
   .filterCloseBtn {
     position: absolute;
-    right: 18;
-    top: 18;
+    right: 18px;
+    top: 18px;
     font-size: 18px;
     font-weight: 600;
     color: rgba($color: #000000, $alpha: 0.4);
     cursor: pointer;
   }
+
   .filterProperty {
     display: flex;
     flex-direction: column;
     gap: 16px;
+
     input {
       height: 48px;
       background-color: transparent;
@@ -52,6 +66,7 @@
       font-size: 16px;
       padding-inline: 16px;
     }
+
     input[type="range"] {
       -webkit-appearance: none;
       width: 100%;
@@ -71,9 +86,11 @@
       }
     }
   }
+
   hr {
     margin-block: 24px;
   }
+
   .filterApplyBtn {
     margin-top: 24px;
     height: 48px;
@@ -86,5 +103,59 @@
     border: none;
     outline: none;
     cursor: pointer;
+  }
+}
+.aside {
+  @extend .asideBase;
+  display: none;
+}
+.asideActive {
+  @extend .asideBase;
+  display: block;
+}
+@media (min-width: 1240px) {
+  .categoriesWrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    .aside {
+      z-index: 1;
+      display: block;
+      max-width: 295px;
+      position: static;
+      transform: none;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      height: fit-content;
+      .filterCloseBtn {
+        display: none;
+      }
+    }
+    .asideActive {
+      display: block;
+      max-width: 295px;
+      position: static;
+      transform: none;
+      border-radius: 20px;
+      height: fit-content;
+      .filterCloseBtn {
+        display: none;
+      }
+    }
+    .categoryContainer {
+      max-width: 100%;
+      .categoryHeader {
+        margin-inline: 0;
+        button {
+          display: none;
+        }
+      }
+    }
+    .cardContainer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 925px;
+      gap: 20px;
+    }
   }
 }
