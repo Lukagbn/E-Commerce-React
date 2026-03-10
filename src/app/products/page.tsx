@@ -190,7 +190,7 @@ function page() {
           </h2>
           <div className={styles.categoriesWrapper}>
             <div className={styles.categoriesBox}>
-              <Link href={"#"}>
+              <Link href={"/products/categories/beauty"}>
                 <Image
                   src={"/casual.webp"}
                   width={310}

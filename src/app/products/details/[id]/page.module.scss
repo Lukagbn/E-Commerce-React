@@ -179,6 +179,14 @@
           }
         }
       }
+      .detailsContainer {
+        width: 100%;
+        .detailsBox {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+      }
     }
   }
   .taButtons {

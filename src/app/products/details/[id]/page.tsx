@@ -47,6 +47,22 @@ function page() {
   const [activeImage, setActiveImage] = useState<number>(2);
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const buttons = ["Product Details", "Rating & Reviews", "FAQs"];
+  const details = [
+    { label: "Brand", value: singleProduct?.brand },
+    { label: "Sku", value: singleProduct?.sku },
+    { label: "Depth", value: singleProduct?.dimensions.depth },
+    { label: "Height", value: singleProduct?.dimensions.height },
+    { label: "Width", value: singleProduct?.dimensions.width },
+    {
+      label: "Warranty Information",
+      value: singleProduct?.warrantyInformation,
+    },
+    {
+      label: "Shipping Information",
+      value: singleProduct?.shippingInformation,
+    },
+    { label: "Availability Status", value: singleProduct?.availabilityStatus },
+  ];
   const fetchSingleProduct = async () => {
     const res = await fetch(`https://dummyjson.com/products/${id}`);
     const result: singleProductType = await res.json();
@@ -168,15 +184,14 @@ function page() {
           {activeIndex === 0 && (
             <div className={styles.tabPanel}>
               <h3>details</h3>
-              <p>{singleProduct.brand}</p>
-              <p>{singleProduct.sku}</p>
-              <p>{singleProduct.weight}</p>
-              <p>{singleProduct.dimensions.depth}</p>
-              <p>{singleProduct.dimensions.height}</p>
-              <p>{singleProduct.dimensions.width}</p>
-              <p>{singleProduct.warrantyInformation}</p>
-              <p>{singleProduct.shippingInformation}</p>
-              <p>{singleProduct.availabilityStatus}</p>
+              <div className={styles.detailsContainer}>
+                {details.map((item, index) => (
+                  <div key={index} className={styles.detailsBox}>
+                    <h4>{item.label}</h4>
+                    <p>{item.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
           {activeIndex === 1 && (

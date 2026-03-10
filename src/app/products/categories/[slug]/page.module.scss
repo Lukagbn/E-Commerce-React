@@ -1,0 +1,49 @@
+.categoryHeader {
+  display: flex;
+  max-width: 390px;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  gap: 14px;
+  max-width: 390px;
+}
+.aside {
+  display: none;
+}
+.asideActive {
+  max-width: 390px;
+  display: block;
+  padding: 18px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #ffff;
+  width: 100%;
+  z-index: 11;
+  .filterCloseBtn {
+    position: absolute;
+    right: 18;
+    top: 18;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba($color: #000000, $alpha: 0.4);
+    cursor: pointer;
+  }
+  .filterProperty {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  hr {
+    margin-block: 24px;
+  }
+}

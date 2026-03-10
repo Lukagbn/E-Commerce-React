@@ -3,13 +3,9 @@
   margin-inline: auto;
 }
 .innerContainer {
+  max-width: 1272px;
   padding-inline: 16px;
   margin-inline: auto;
-}
-@media (min-width: 1240px) {
-  .innerContainer {
-    max-width: 1240px;
-  }
 }
 @media (min-width: 1440px) {
   .container {
