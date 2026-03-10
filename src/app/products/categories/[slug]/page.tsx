@@ -14,6 +14,9 @@ function page() {
   const [starRate, setStarRate] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [aside, setAside] = useState(false);
+  const [appliedPrice, setAppliedPrice] = useState<number>(1000);
+  const [appliedStarRate, setAppliedStarRate] = useState<number>(0);
+  const [appliedTitle, setAppliedTitle] = useState<string>("");
   const fetchCategoryProducts = async () => {
     const res = await fetch(`https://dummyjson.com/products/category/${slug}`);
     const result = await res.json();
@@ -51,7 +54,7 @@ function page() {
               value={price}
               onChange={(e) => setPrice(Number(e.target.value))}
             />
-            <span>{price}</span>
+            <span>${price}</span>
           </div>
           <hr />
           <div className={styles.filterProperty}>
@@ -77,6 +80,17 @@ function page() {
               onChange={(e) => setTitle(String(e.target.value))}
             />
           </div>
+          <hr />
+          <button
+            className={styles.filterApplyBtn}
+            onClick={() => {
+              setAppliedPrice(price);
+              setAppliedStarRate(starRate);
+              setAppliedTitle(title);
+            }}
+          >
+            Apply Filter
+          </button>
         </aside>
         <div className={`${styles.categoryHeader} ${layout.innerContainer}`}>
           <h2>{slug}</h2>
@@ -84,12 +98,14 @@ function page() {
         </div>
         <div className={`${styles.cardContainer} ${layout.innerContainer}`}>
           {categoryProducts
-            ?.filter((product) => product.price <= price)
-            .filter((product) => product.rating >= starRate)
+            ?.filter((product) => product.price <= appliedPrice)
+            .filter((product) => product.rating >= appliedStarRate)
             .filter((product) =>
-              title === ""
+              appliedTitle === ""
                 ? true
-                : product.title.toLowerCase().includes(title.toLowerCase()),
+                : product.title
+                    .toLowerCase()
+                    .includes(appliedTitle.toLowerCase()),
             )
             .map((card, index) => (
               <Card
