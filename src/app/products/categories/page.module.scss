@@ -1,0 +1,177 @@
+.categoryContainer {
+  max-width: 390px;
+  width: 100%;
+  margin-inline: auto;
+  .categoryHeader {
+    display: flex;
+    max-width: 390px;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 29px;
+    text-transform: capitalize;
+  }
+  .loadMoreBtn {
+    max-width: 235px;
+    width: 100%;
+    outline: none;
+    background-color: transparent;
+    border-radius: 62px;
+    outline: none;
+    height: 48px;
+    color: #000000;
+    border: 1px solid black;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 20px;
+    transition: 0.4s ease-in-out;
+    &:hover {
+      background-color: #000000;
+      color: #ffff;
+      scale: 0.95;
+    }
+  }
+}
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  gap: 14px;
+  max-width: 390px;
+}
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background-color: #000000;
+  opacity: 0.6;
+}
+.asideBase {
+  max-width: 390px;
+  padding: 18px;
+  position: fixed;
+  bottom: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #ffff;
+  width: 100%;
+  z-index: 11;
+  .filterCloseBtn {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba($color: #000000, $alpha: 0.4);
+    cursor: pointer;
+  }
+  .filterProperty {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    input {
+      height: 48px;
+      background-color: transparent;
+      border-radius: 62px;
+      outline: none;
+      border: 1px solid black;
+      color: black;
+      font-size: 16px;
+      padding-inline: 16px;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      background: #000;
+      border-radius: 2px;
+      outline: none;
+      padding-inline: 0px;
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #000;
+        cursor: pointer;
+      }
+    }
+  }
+  hr {
+    margin-block: 24px;
+  }
+  .filterApplyBtn {
+    margin-top: 24px;
+    height: 48px;
+    background-color: #000000;
+    color: #ffff;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 62px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+}
+.aside {
+  @extend .asideBase;
+  display: none;
+}
+.asideActive {
+  @extend .asideBase;
+  display: block;
+}
+@media (min-width: 1240px) {
+  .categoriesWrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    .aside {
+      z-index: 1;
+      display: block;
+      max-width: 295px;
+      position: static;
+      transform: none;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      height: fit-content;
+      .filterCloseBtn {
+        display: none;
+      }
+    }
+    .asideActive {
+      display: block;
+      max-width: 295px;
+      position: static;
+      transform: none;
+      border-radius: 20px;
+      height: fit-content;
+      .filterCloseBtn {
+        display: none;
+      }
+    }
+    .categoryContainer {
+      max-width: 100%;
+      .categoryHeader {
+        margin-inline: 0;
+        button {
+          display: none;
+        }
+      }
+    }
+    .cardContainer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 925px;
+      gap: 20px;
+    }
+  }
+}

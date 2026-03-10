@@ -32,9 +32,6 @@ function page() {
       document.documentElement.style.overflow = "";
     }
   }, [aside]);
-  useEffect(() => {
-    console.log(categoryProducts);
-  }, [categoryProducts]);
   if (!categoryProducts) return <div>loading...</div>;
   return (
     <>
