@@ -58,7 +58,7 @@ function page() {
         {checkUser() ? (
           <p>Your cart is empty</p>
         ) : (
-          <p>to use cart you must log in</p>
+          <p>you must log in to use cart</p>
         )}
         {checkUser() ? (
           <Link href={"/products/categories"}>Browse products</Link>

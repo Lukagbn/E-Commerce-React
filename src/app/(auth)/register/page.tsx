@@ -49,7 +49,6 @@ function page() {
   });
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [checked, setChecked] = useState(false);
   const handleRegister = async (data: {
     firstName: string;
     lastName: string;
@@ -127,24 +126,28 @@ function page() {
           )}
         </div>
         <div className={styles.formGroup}>
-          <div className={styles.formInnerGroup}>
-            <label>Password</label>
-            <input
-              {...register("password")}
-              type={passwordVisible ? "text" : "password"}
-              required
-            />
-            <button
-              type="button"
-              className={styles.passwordVisible}
-              onClick={() => setPasswordVisible(!passwordVisible)}
-            >
-              {passwordVisible ? "hide" : "show"}
-            </button>
+          <div className={styles.formGroup}>
+            <label htmlFor="password">Password</label>
+            <div className={styles.passwordInput}>
+              <input
+                id="password"
+                type={passwordVisible ? "text" : "password"}
+                {...register("password")}
+              />
+              <button
+                className={styles.passwordVisible}
+                type="button"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              >
+                {passwordVisible ? "show" : "hide"}
+              </button>
+            </div>
+            {errors.password && (
+              <span className={styles.errorMessage}>
+                {errors.password.message}
+              </span>
+            )}
           </div>
-          {errors.password && (
-            <p className={styles.errorMessage}>{errors.password.message}</p>
-          )}
         </div>
         <div className={styles.formGroup}>
           <div className={styles.formInnerGroup}>
@@ -158,6 +161,9 @@ function page() {
         <button className={styles.logInBtn} type="submit">
           Create account
         </button>
+        <p className={styles.logIn}>
+          Already have an account? <Link href={"/login"}>Log In</Link>
+        </p>
       </form>
     </main>
   );

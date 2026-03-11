@@ -51,7 +51,6 @@
     }
     .errorMessage {
       color: red;
-      text-align: center;
     }
     .logInBtn {
       height: 48px;
@@ -68,6 +67,13 @@
         scale: 0.95;
         background-color: #000000;
         color: #ffff;
+      }
+    }
+    .logIn {
+      text-align: center;
+      a {
+        text-decoration: underline;
+        color: rgb(0, 60, 255);
       }
     }
   }
