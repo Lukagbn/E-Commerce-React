@@ -93,7 +93,9 @@ function page() {
               designed to bring out your individuality and cater to your sense
               of style.
             </p>
-            <button>Shop Now</button>
+            <Link href={"/products/categories"} className={styles.shopNow}>
+              Shop Now
+            </Link>
             <div className={styles.overviewContainer}>
               <div className={styles.overviewBox}>
                 <h3>200+</h3>

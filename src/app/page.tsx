@@ -8,8 +8,10 @@ function page() {
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
     if (localUser || sessionUser) {
+      document.body.classList.add("no-padding");
       router.push("/products");
     } else {
+      document.body.classList.remove("no-padding");
       router.push("/login");
     }
   };

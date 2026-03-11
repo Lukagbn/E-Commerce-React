@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Navbar.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import layout from "@/app/layout.module.scss";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
   const NAV_LIST = [
@@ -29,14 +30,28 @@ function Navbar() {
     },
   ];
   const [active, setActive] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const pathname = usePathname();
+
+  const checkUser = () => {
+    if (typeof window === "undefined") return;
+    const localUser = localStorage.getItem("localUser");
+    const sessionUser = sessionStorage.getItem("sessionUser");
+    setIsLoggedIn(!(localUser || sessionUser));
+  };
+  useEffect(() => {
+    checkUser();
+  }, [pathname]);
   return (
     <header>
-      <div className={styles.promoBar}>
-        <p>
-          Sign up and get 20% off to your first order.{" "}
-          <Link href={`/register`}>Sign Up Now</Link>
-        </p>
-      </div>
+      {isLoggedIn ? (
+        <div className={styles.promoBar}>
+          <p>
+            Sign up and get 20% off to your first order.{" "}
+            <Link href={`/register`}>Sign Up Now</Link>
+          </p>
+        </div>
+      ) : null}
       <div className={`${styles.navbar}  ${layout.innerContainer}`}>
         <div className={styles.brand}>
           <button
@@ -102,6 +117,7 @@ function Navbar() {
           </Link>
         </div>
       </div>
+      <hr className={styles.hr} />
     </header>
   );
 }
