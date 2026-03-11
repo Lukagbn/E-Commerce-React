@@ -59,11 +59,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${satoshi.variable} ${integralCF.variable}`}>
       <body className="antialiased">
-        <StoreProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </StoreProvider>
+        <Navbar />
+        <StoreProvider>{children}</StoreProvider>
+        <Footer />
       </body>
     </html>
   );

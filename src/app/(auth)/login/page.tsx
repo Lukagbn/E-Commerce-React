@@ -122,6 +122,9 @@ function page() {
         <button className={styles.logInBtn} type="submit">
           log in
         </button>
+        <p>
+          didnt have an account? <Link href={"/register"}>Sign up</Link>
+        </p>
         {loginError && <div className={styles.errorMessage}>{loginError}</div>}
       </form>
     </main>

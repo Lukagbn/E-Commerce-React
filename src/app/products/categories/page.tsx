@@ -33,7 +33,8 @@ function page() {
       document.documentElement.style.overflow = "";
     }
   }, [aside]);
-  if (!categoryProducts) return <div>loading...</div>;
+  if (!categoryProducts)
+    return <div className={styles.loading}>loading...</div>;
   return (
     <>
       <div className={`${aside ? styles.overlay : ""}`}></div>

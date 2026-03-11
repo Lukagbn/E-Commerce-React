@@ -11,11 +11,11 @@ export default function StoreProvider({
   children: React.ReactNode;
 }) {
   const storeRef = useRef<AppStore | null>(null);
-  const persistorRef = useRef<Persistor | null>(null); // ← add this
+  const persistorRef = useRef<Persistor | null>(null);
 
   if (!storeRef.current) {
     storeRef.current = makeStore();
-    persistorRef.current = persistStore(storeRef.current); // ← create once
+    persistorRef.current = persistStore(storeRef.current);
   }
 
   return (

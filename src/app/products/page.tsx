@@ -76,7 +76,7 @@ function page() {
     arrivalfetch();
   }, []);
   if (!arrivals) {
-    return <div>Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   }
   return (
     <main className={layout.container}>

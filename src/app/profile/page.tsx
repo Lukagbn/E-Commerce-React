@@ -53,7 +53,7 @@ function page() {
     fetchUser();
     checkUser();
   }, []);
-  if (!userData) return <div>Loading...</div>;
+  if (!userData) return <div className={styles.loading}>Loading...</div>;
   return (
     <main>
       <div className={layout.innerContainer}>
