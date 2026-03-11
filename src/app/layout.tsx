@@ -8,12 +8,12 @@ import StoreProvider from "./StoreProvider";
 const satoshi = localFont({
   src: [
     {
-      path: "./fonts/Satoshi-regular.woff2",
+      path: "./fonts/Satoshi-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./fonts/Satoshi-medium.woff2",
+      path: "./fonts/Satoshi-Medium.woff2",
       weight: "500",
       style: "normal",
     },
