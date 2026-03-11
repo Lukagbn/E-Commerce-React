@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import styles from "./page.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { stringify } from "querystring";
 
 const schema = yup.object({
   username: yup
@@ -41,12 +42,17 @@ function page() {
         setLoginError("Incorrect login information");
         return;
       }
-      // const result = await res.json();
+      const result = await res.json();
       if (checked) {
         localStorage.setItem("localUser", "true");
+        localStorage.setItem("token", JSON.stringify(result));
       } else {
         sessionStorage.setItem("sessionUser", "true");
+        sessionStorage.setItem("token", JSON.stringify(result));
       }
+      const token = checked
+        ? localStorage.getItem("token")
+        : sessionStorage.getItem("token");
       router.push("/");
     } catch (error) {
       console.error("error", error);

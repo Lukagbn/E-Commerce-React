@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Navbar from "@/app/components/Navbar/Navbar";
 import "./globals.scss";
 import Footer from "@/app/components/Footer/Footer";
+import StoreProvider from "./StoreProvider";
 
 const satoshi = localFont({
   src: [
@@ -58,9 +59,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${satoshi.variable} ${integralCF.variable}`}>
       <body className="antialiased">
-        <Navbar />
-        {children}
-        <Footer />
+        <StoreProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );

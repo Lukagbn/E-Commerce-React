@@ -7,6 +7,8 @@ import layout from "@/app/layout.module.scss";
 import StarRate from "@/app/components/StarRate/StarRate";
 import ProductCard from "@/app/components/ProductCard/ProductCard";
 import { CardProps } from "@/app/components/Card/Card";
+import { useAppDispatch } from "@/lib/hook";
+import { addToCart } from "@/lib/slices/cartSlice";
 
 interface reviewsType {
   rating: number;
@@ -37,9 +39,9 @@ interface singleProductType extends reviewsType {
   availabilityStatus: string;
   reviews: reviewsType[];
 }
-
 function page() {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
   const [singleProduct, setSingleProduct] = useState<singleProductType | null>(
     null,
   );
@@ -77,6 +79,18 @@ function page() {
   };
   function changeActivePanel(index: number) {
     setActiveIndex(index);
+  }
+  function handleAddToCart(item: singleProductType) {
+    dispatch(
+      addToCart({
+        id: Number(item.id),
+        title: item.title,
+        price: item.price,
+        images: item.images,
+        rating: item.rating,
+        quantity: 1,
+      }),
+    );
   }
   useEffect(() => {
     fetchSingleProduct();
@@ -162,7 +176,12 @@ function page() {
                 <span>1</span>
                 <button>+</button>
               </div>
-              <button className={styles.addToCartBtn}>Add to Cart</button>
+              <button
+                className={styles.addToCartBtn}
+                onClick={() => handleAddToCart(singleProduct)}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>

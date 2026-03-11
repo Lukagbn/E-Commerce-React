@@ -258,21 +258,23 @@ function page() {
             </div>
           </div>
           <div className={styles.reviewsWrapper} ref={containerRef}>
-            {reviews.map((review, index) => (
-              <div key={index} className={styles.reviewCard}>
-                <StarRate ratingNumber={false} rating={review.rating} />
-                <h4>
-                  {review.reviewerName}{" "}
-                  <Image
-                    src={"/check.png"}
-                    width={19}
-                    height={19}
-                    alt="check mark"
-                  />
-                </h4>
-                <p>"{review.comment}"</p>
-              </div>
-            ))}
+            {reviews
+              .filter((review) => review.rating >= 4)
+              .map((review, index) => (
+                <div key={index} className={styles.reviewCard}>
+                  <StarRate ratingNumber={false} rating={review.rating} />
+                  <h4>
+                    {review.reviewerName}{" "}
+                    <Image
+                      src={"/check.png"}
+                      width={19}
+                      height={19}
+                      alt="check mark"
+                    />
+                  </h4>
+                  <p>"{review.comment}"</p>
+                </div>
+              ))}
           </div>
         </div>
       </section>

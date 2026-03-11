@@ -3,8 +3,30 @@ import styles from "./Navbar.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import layout from "@/app/layout.module.scss";
-
+import { title } from "process";
 async function Navbar() {
+  const NAV_LIST = [
+    {
+      title: "Shop",
+      href: "/products/categories",
+      className: "dropDown",
+    },
+    {
+      title: "On Sale",
+      href: "/products/categories",
+      className: "",
+    },
+    {
+      title: "New Arrivals",
+      href: "/products/categories",
+      className: "",
+    },
+    {
+      title: "Bands",
+      href: "/products/categories",
+      className: "",
+    },
+  ];
   return (
     <header>
       <div className={styles.promoBar}>
@@ -29,18 +51,11 @@ async function Navbar() {
         </div>
         <nav className={`${styles.nav}`}>
           <ul className={styles.navList}>
-            <li className={styles.dropDown}>
-              <Link href={"/products/categories"}>Shop</Link>
-            </li>
-            <li>
-              <Link href={"#"}>On Sale</Link>
-            </li>
-            <li>
-              <Link href={"#"}>New Arrivals</Link>
-            </li>
-            <li>
-              <Link href={"#"}>Bands</Link>
-            </li>
+            {NAV_LIST.map((list) => (
+              <li key={list.title}>
+                <Link href={list.href}>{list.title}</Link>
+              </li>
+            ))}
           </ul>
         </nav>
         <div className={styles.actions}>
@@ -66,7 +81,7 @@ async function Navbar() {
               alt="cart icon"
             ></Image>
           </Link>
-          <Link href={"#"}>
+          <Link href={"/profile"}>
             <Image
               src={"/profile.svg"}
               width={24}
