@@ -50,9 +50,6 @@ function page() {
         sessionStorage.setItem("sessionUser", "true");
         sessionStorage.setItem("token", JSON.stringify(result));
       }
-      const token = checked
-        ? localStorage.getItem("token")
-        : sessionStorage.getItem("token");
       router.push("/");
     } catch (error) {
       console.error("error", error);
@@ -62,6 +59,7 @@ function page() {
     setChecked(!checked);
   };
   const checkUser = () => {
+    if (typeof window === "undefined") return;
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
     if (localUser || sessionUser) {

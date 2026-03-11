@@ -38,6 +38,7 @@ function page() {
     }
   };
   const checkUser = () => {
+    if (typeof window === "undefined") return;
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
     if (!(localUser || sessionUser)) {
