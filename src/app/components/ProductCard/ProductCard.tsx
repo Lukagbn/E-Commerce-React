@@ -3,6 +3,7 @@ import styles from "./ProductCard.module.scss";
 import layout from "@/app/layout.module.scss";
 import Card from "../Card/Card";
 import { CardProps } from "../Card/Card";
+import Link from "next/link";
 
 type productCard = {
   className?: string;
@@ -28,7 +29,12 @@ function ProductCard({ className, title, cards }: productCard) {
           ))}
         </div>
       </div>
-      <button className={layout.innerContainer}>View All</button>
+      <Link
+        className={`${layout.innerContainer} ${styles.viewAll}`}
+        href={"/products/categories"}
+      >
+        View All
+      </Link>
     </section>
   );
 }
