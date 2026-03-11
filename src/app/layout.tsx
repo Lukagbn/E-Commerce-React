@@ -28,17 +28,17 @@ const satoshi = localFont({
 const integralCF = localFont({
   src: [
     {
-      path: "./fonts/integralCFRegular.woff2",
+      path: "./fonts/IntegralCFRegular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./fonts/integralCFMediumRegular.woff2",
+      path: "./fonts/IntegralCFMediumRegular.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "./fonts/integralCFBoldRegular.woff2",
+      path: "./fonts/IntegralCFBoldRegular.woff2",
       weight: "700",
       style: "normal",
     },
