@@ -88,6 +88,7 @@ function page() {
         price: item.price,
         images: item.images,
         rating: item.rating,
+        discountPercentage: item.discountPercentage,
         quantity: 1,
       }),
     );

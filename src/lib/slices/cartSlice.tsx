@@ -7,6 +7,7 @@ interface CartItem {
   images: string[];
   rating: number;
   quantity: number;
+  discountPercentage: number;
 }
 interface CartState {
   cartProducts: CartItem[];
@@ -52,6 +53,16 @@ const cartSlice = createSlice({
   },
 });
 
+export const cartTotalPrice = (state: { cart: CartState }) =>
+  state.cart.cartProducts.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  );
+export const cartTotalDiscount = (state: { cart: CartState }) =>
+  state.cart.cartProducts.reduce(
+    (total, item) => total + item.discountPercentage,
+    0,
+  );
 export const { addToCart, deleteFromCart, decreaseQuantity } =
   cartSlice.actions;
 export default cartSlice.reducer;
