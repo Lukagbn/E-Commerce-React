@@ -73,7 +73,7 @@ async function Navbar() {
               alt="search icon"
             ></Image>
           </Link>
-          <Link href={"#"}>
+          <Link href={"/cart"}>
             <Image
               src={"/cart.svg"}
               width={24}

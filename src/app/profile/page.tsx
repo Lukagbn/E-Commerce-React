@@ -24,6 +24,9 @@ function page() {
         Authorization: `Bearer ${parsedToken.accessToken}`, // Pass JWT via Authorization header
       },
     });
+    // if (res.status === 401) {
+    //   console.log("Error");
+    // }
     const result = await res.json();
     setUserData(result);
     console.log(result);
