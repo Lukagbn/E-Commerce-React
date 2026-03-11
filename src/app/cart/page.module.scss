@@ -86,6 +86,8 @@
     }
   }
   .totalContainer {
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
     border: 1px solid #f0eeed;
     padding: 20px;
@@ -106,6 +108,17 @@
       .totalDiscount {
         color: red;
       }
+    }
+    button {
+      background-color: #000000;
+      color: #ffffff;
+      border: none;
+      outline: none;
+      max-width: 200px;
+      width: 100%;
+      padding: 15px;
+      border-radius: 62px;
+      margin: auto;
     }
   }
 }
