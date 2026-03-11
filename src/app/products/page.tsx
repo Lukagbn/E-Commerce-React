@@ -189,42 +189,46 @@ function page() {
             <div className={styles.categoriesBox}>
               <Link href={"/products/categories/beauty"}>
                 <Image
-                  src={"/casual.webp"}
+                  src={"/beauty.webp"}
                   width={310}
                   height={190}
                   alt="categories casual"
                 />
               </Link>
+              <span>beauty</span>
             </div>
             <div className={styles.categoriesBox}>
-              <Link href={"#"}>
+              <Link href={"/products/categories/smartphones"}>
                 <Image
-                  src={"/formal.webp"}
+                  src={"/smartphones.webp"}
                   width={310}
                   height={190}
                   alt="categories formal"
                 />
               </Link>
+              <span>smartphones</span>
             </div>
             <div className={styles.categoriesBox}>
-              <Link href={"#"}>
+              <Link href={"/products/categories/smartphones/fragrances"}>
                 <Image
-                  src={"/party.webp"}
+                  src={"/fragrances.webp"}
                   width={310}
                   height={190}
                   alt="categories party"
                 />
               </Link>
+              <span>fragrances</span>
             </div>
             <div className={styles.categoriesBox}>
-              <Link href={"#"}>
+              <Link href={"/products/categories/smartphones/sunglasses"}>
                 <Image
-                  src={"/gym.webp"}
+                  src={"/sunglasses.webp"}
                   width={310}
                   height={190}
                   alt="categories gym"
                 />
               </Link>
+              <span>sunglasses</span>
             </div>
           </div>
         </div>
