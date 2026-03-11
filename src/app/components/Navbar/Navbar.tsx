@@ -117,7 +117,6 @@ function Navbar() {
           </Link>
         </div>
       </div>
-      <hr className={styles.hr} />
     </header>
   );
 }
