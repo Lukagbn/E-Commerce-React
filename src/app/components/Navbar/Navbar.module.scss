@@ -59,15 +59,16 @@
 .navACtive {
   max-width: 200px;
   width: 100%;
-  height: 200px;
-  top: 36px;
+  height: 400px;
   position: absolute;
   background-color: #000000;
+  top: 0;
   left: 0;
   color: #ffff;
   padding: 20px;
   border-bottom-right-radius: 20px;
   .navList {
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     gap: 20px;
