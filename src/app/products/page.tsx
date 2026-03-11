@@ -117,31 +117,6 @@ function page() {
               </div>
             </div>
           </div>
-          <div className={styles.imgContainer}>
-            <div className={styles.imgWrapper}>
-              <Image
-                className={styles.mainImage}
-                src={"/mainImage.svg"}
-                width={390}
-                height={448}
-                alt="main image"
-              ></Image>
-              <Image
-                src={"/mainStar.svg"}
-                className={styles.rightStar}
-                width={76}
-                height={76}
-                alt="star"
-              ></Image>
-              <Image
-                src={"/mainStar.svg"}
-                className={styles.leftStar}
-                width={44}
-                height={44}
-                alt="star"
-              ></Image>
-            </div>
-          </div>
         </div>
       </section>
       <section className={styles.brandContainer}>

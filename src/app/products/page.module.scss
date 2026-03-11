@@ -1,5 +1,10 @@
 .mainHeadingContainer {
+  background-image: url("/mainImage.png");
   background-color: rgba(242, 240, 241, 1);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: auto 400px;
+  height: 853px;
   .mainHeadingContainerWrapper {
     padding-top: 40px;
     display: flex;
@@ -28,22 +33,6 @@
     .imgContainer {
       display: flex;
       justify-content: center;
-      .imgWrapper {
-        position: relative;
-        .mainImage {
-          display: block;
-        }
-        .rightStar {
-          position: absolute;
-          right: 21px;
-          top: 34px;
-        }
-        .leftStar {
-          position: absolute;
-          left: 27px;
-          top: 137px;
-        }
-      }
     }
     .mainHeader {
       font-family: var(--font-integral);
@@ -51,6 +40,7 @@
       line-height: 34px;
     }
     .headingWrapper {
+      max-width: 596px;
       display: flex;
       flex-direction: column;
       gap: 20;
@@ -242,6 +232,9 @@
   }
 }
 @media (min-width: 600px) {
+  .mainHeadingContainer {
+    background-size: auto 550px;
+  }
   .browseCategories {
     .categoriesContainer {
       .categoriesWrapper {
@@ -280,14 +273,19 @@
     margin-inline: auto;
   }
 }
+@media (min-width: 800px) {
+  .mainHeadingContainer {
+    background-position: 100% 100%;
+    background-size: auto;
+    height: 663px;
+  }
+}
 @media (min-width: 1440px) {
   .mainHeadingContainer {
     .mainHeadingContainerWrapper {
       flex-direction: row;
       gap: 0;
-      height: 663px;
       .headingWrapper {
-        max-width: 596px;
         gap: 32;
         justify-content: center;
         h1 {
