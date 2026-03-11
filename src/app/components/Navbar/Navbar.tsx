@@ -10,7 +10,7 @@ async function Navbar() {
       <div className={styles.promoBar}>
         <p>
           Sign up and get 20% off to your first order.{" "}
-          <Link href={`#`}>Sign Up Now</Link>
+          <Link href={`/register`}>Sign Up Now</Link>
         </p>
       </div>
       <div className={`${styles.navbar}  ${layout.innerContainer}`}>
