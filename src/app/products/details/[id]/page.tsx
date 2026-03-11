@@ -9,6 +9,7 @@ import ProductCard from "@/app/components/ProductCard/ProductCard";
 import { CardProps } from "@/app/components/Card/Card";
 import { useAppDispatch } from "@/lib/hook";
 import { addToCart } from "@/lib/slices/cartSlice";
+import Link from "next/link";
 
 interface reviewsType {
   rating: number;
@@ -93,9 +94,20 @@ function page() {
       }),
     );
   }
+  const checkUser = () => {
+    if (typeof window === "undefined") return;
+    const localUser = localStorage.getItem("localUser");
+    const sessionUser = sessionStorage.getItem("sessionUser");
+    if (!(localUser || sessionUser)) {
+      return false;
+    } else {
+      return true;
+    }
+  };
   useEffect(() => {
     fetchSingleProduct();
     fetchProductCards();
+    checkUser();
   }, []);
   if (!singleProduct) return <p>Loading...</p>;
   return (
@@ -177,12 +189,18 @@ function page() {
                 <span>1</span>
                 <button>+</button>
               </div>
-              <button
-                className={styles.addToCartBtn}
-                onClick={() => handleAddToCart(singleProduct)}
-              >
-                Add to Cart
-              </button>
+              {checkUser() ? (
+                <button
+                  className={styles.addToCartBtn}
+                  onClick={() => handleAddToCart(singleProduct)}
+                >
+                  Add to Cart
+                </button>
+              ) : (
+                <Link href={"/login"} className={styles.addToCartBtn}>
+                  log in
+                </Link>
+              )}
             </div>
           </div>
         </div>
