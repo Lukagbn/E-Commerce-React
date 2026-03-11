@@ -23,6 +23,7 @@ const satoshi = localFont({
       style: "normal",
     },
   ],
+  display: "swap",
   variable: "--font-satoshi",
 });
 const integralCF = localFont({
@@ -43,6 +44,7 @@ const integralCF = localFont({
       style: "normal",
     },
   ],
+  display: "swap",
   variable: "--font-integral",
 });
 
