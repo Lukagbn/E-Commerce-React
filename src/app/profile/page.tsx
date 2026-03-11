@@ -20,19 +20,21 @@ function page() {
   const fetchUser = async () => {
     const token =
       localStorage.getItem("token") || sessionStorage.getItem("token");
-    const parsedToken = token ? JSON.parse(token) : null;
-    const res = await fetch("https://dummyjson.com/auth/me", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${parsedToken.accessToken}`,
-      },
-    });
-    if (res.status === 401) {
-      localStorage.clear();
-      sessionStorage.clear();
-    } else {
-      const result = await res.json();
-      setUserData(result);
+    if (token !== null) {
+      const parsedToken = token ? JSON.parse(token) : null;
+      const res = await fetch("https://dummyjson.com/auth/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${parsedToken.accessToken}`,
+        },
+      });
+      if (res.status === 401) {
+        localStorage.clear();
+        sessionStorage.clear();
+      } else {
+        const result = await res.json();
+        setUserData(result);
+      }
     }
   };
   const checkUser = () => {
@@ -42,6 +44,11 @@ function page() {
       router.push("/login");
     }
   };
+  function logOut() {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.reload();
+  }
   useEffect(() => {
     fetchUser();
     checkUser();
@@ -77,7 +84,7 @@ function page() {
               <h4>phone</h4>
               <span>{userData.phone}</span>
             </div>
-            <button>log out</button>
+            <button onClick={() => logOut()}>log out</button>
           </div>
         </div>
       </div>

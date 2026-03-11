@@ -10,6 +10,10 @@
     margin: auto;
     margin-bottom: 29px;
     text-transform: capitalize;
+    .filterBtn {
+      background-color: transparent;
+      border: none;
+    }
   }
 }
 .cardContainer {

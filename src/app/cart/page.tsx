@@ -12,7 +12,6 @@ import {
 import { decreaseQuantity } from "@/lib/slices/cartSlice";
 import { deleteFromCart } from "@/lib/slices/cartSlice";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 type cart = {
   id: number;
@@ -25,7 +24,6 @@ type cart = {
 };
 
 function page() {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const cartProducts = useAppSelector((state) => state.cart.cartProducts);
   const totalPrice = useAppSelector(cartTotalPrice);
@@ -40,26 +38,34 @@ function page() {
     dispatch(deleteFromCart(itemId));
   }
   const checkUser = () => {
-    const hasChecked = sessionStorage.getItem("hasChecked");
-    if (hasChecked) return;
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
     if (!(localUser || sessionUser)) {
       localStorage.clear();
       sessionStorage.clear();
-      window.location.reload();
+      return false;
+    } else {
+      return true;
     }
-    sessionStorage.setItem("hasChecked", "true");
   };
+  console.log(checkUser());
   useEffect(() => {
     checkUser();
   }, []);
   if (cartProducts.length === 0) {
     return (
-      <p className={styles.emptyCart}>
-        Your cart is empty.{" "}
-        <Link href={"/products/categories"}>Browse products</Link>
-      </p>
+      <div className={styles.emptyCart}>
+        {checkUser() ? (
+          <p>Your cart is empty</p>
+        ) : (
+          <p>to use cart you must log in</p>
+        )}
+        {checkUser() ? (
+          <Link href={"/products/categories"}>Browse products</Link>
+        ) : (
+          <Link href={"/login"}>Log In</Link>
+        )}
+      </div>
     );
   }
   return (
