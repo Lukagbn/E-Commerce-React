@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import styles from "./page.module.scss";
+import form from "../form.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -83,60 +83,60 @@ function page() {
     checkUser();
   }, []);
   return (
-    <main className={styles.main}>
+    <main className={form.main}>
       <form
-        className={styles.form}
+        className={form.form}
         onSubmit={handleSubmit(handleRegister)}
         noValidate
       >
-        <h1 className={styles.formHeader}>Register</h1>
-        <div className={styles.formGroup}>
-          <div className={styles.formInnerGroup}>
+        <h1 className={form.formHeader}>Register</h1>
+        <div className={form.formGroup}>
+          <div className={form.formInnerGroup}>
             <label>First name</label>
             <input {...register("firstName")} type="text" required />
           </div>
           {errors.firstName && (
-            <p className={styles.errorMessage}>{errors.firstName.message}</p>
+            <p className={form.errorMessage}>{errors.firstName.message}</p>
           )}
         </div>
-        <div className={styles.formGroup}>
-          <div className={styles.formInnerGroup}>
+        <div className={form.formGroup}>
+          <div className={form.formInnerGroup}>
             <label>Last name</label>
             <input {...register("lastName")} type="text" required />
           </div>
           {errors.lastName && (
-            <p className={styles.errorMessage}>{errors.lastName.message}</p>
+            <p className={form.errorMessage}>{errors.lastName.message}</p>
           )}
         </div>
-        <div className={styles.formGroup}>
-          <div className={styles.formInnerGroup}>
+        <div className={form.formGroup}>
+          <div className={form.formInnerGroup}>
             <label>Age</label>
             <input {...register("age")} type="number" required />
           </div>
           {errors.age && (
-            <p className={styles.errorMessage}>{errors.age.message}</p>
+            <p className={form.errorMessage}>{errors.age.message}</p>
           )}
         </div>
-        <div className={styles.formGroup}>
-          <div className={styles.formInnerGroup}>
+        <div className={form.formGroup}>
+          <div className={form.formInnerGroup}>
             <label>Email</label>
             <input {...register("email")} type="email" required />
           </div>
           {errors.email && (
-            <p className={styles.errorMessage}>{errors.email.message}</p>
+            <p className={form.errorMessage}>{errors.email.message}</p>
           )}
         </div>
-        <div className={styles.formGroup}>
-          <div className={styles.formGroup}>
+        <div className={form.formGroup}>
+          <div className={form.formGroup}>
             <label htmlFor="password">Password</label>
-            <div className={styles.passwordInput}>
+            <div className={form.passwordInput}>
               <input
                 id="password"
                 type={passwordVisible ? "text" : "password"}
                 {...register("password")}
               />
               <button
-                className={styles.passwordVisible}
+                className={form.passwordVisible}
                 type="button"
                 onClick={() => setPasswordVisible(!passwordVisible)}
               >
@@ -144,25 +144,25 @@ function page() {
               </button>
             </div>
             {errors.password && (
-              <span className={styles.errorMessage}>
+              <span className={form.errorMessage}>
                 {errors.password.message}
               </span>
             )}
           </div>
         </div>
-        <div className={styles.formGroup}>
-          <div className={styles.formInnerGroup}>
+        <div className={form.formGroup}>
+          <div className={form.formInnerGroup}>
             <label>Phone</label>
             <input {...register("phone")} type="tel" required />
           </div>
           {errors.phone && (
-            <p className={styles.errorMessage}>{errors.phone.message}</p>
+            <p className={form.errorMessage}>{errors.phone.message}</p>
           )}
         </div>
-        <button className={styles.logInBtn} type="submit">
+        <button className={form.logInBtn} type="submit">
           Create account
         </button>
-        <p className={styles.logIn}>
+        <p className={form.link}>
           Already have an account? <Link href={"/login"}>Log In</Link>
         </p>
       </form>

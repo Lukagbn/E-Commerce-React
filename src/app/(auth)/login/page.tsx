@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import styles from "./page.module.scss";
+import form from "../form.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { stringify } from "querystring";
@@ -70,32 +70,30 @@ function page() {
     checkUser();
   }, []);
   return (
-    <main className={styles.main}>
+    <main className={form.main}>
       <form
-        className={styles.form}
+        className={form.form}
         onSubmit={handleSubmit(handleLogIn)}
         noValidate
       >
-        <h1 className={styles.formHeader}>log in</h1>
-        <div className={styles.formGroup}>
+        <h1 className={form.formHeader}>log in</h1>
+        <div className={form.formGroup}>
           <label htmlFor="username">Username</label>
           <input id="username" type="text" {...register("username")} />
           {errors.username && (
-            <span className={styles.errorMessage}>
-              {errors.username.message}
-            </span>
+            <span className={form.errorMessage}>{errors.username.message}</span>
           )}
         </div>
-        <div className={styles.formGroup}>
+        <div className={form.formGroup}>
           <label htmlFor="password">Password</label>
-          <div className={styles.passwordInput}>
+          <div className={form.passwordInput}>
             <input
               id="password"
               type={passwordVisible ? "text" : "password"}
               {...register("password")}
             />
             <button
-              className={styles.passwordVisible}
+              className={form.passwordVisible}
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
@@ -103,12 +101,10 @@ function page() {
             </button>
           </div>
           {errors.password && (
-            <span className={styles.errorMessage}>
-              {errors.password.message}
-            </span>
+            <span className={form.errorMessage}>{errors.password.message}</span>
           )}
         </div>
-        <div className={styles.checkboxGroup}>
+        <div className={form.checkboxGroup}>
           <input
             type="checkbox"
             id="checkbox"
@@ -117,13 +113,13 @@ function page() {
           />
           <label htmlFor="checkbox">Remember me</label>
         </div>
-        <button className={styles.logInBtn} type="submit">
+        <button className={form.logInBtn} type="submit">
           log in
         </button>
-        <p className={styles.signUp}>
+        <p className={form.link}>
           Didn't have an account? <Link href={"/register"}>Sign up</Link>
         </p>
-        {loginError && <div className={styles.errorMessage}>{loginError}</div>}
+        {loginError && <div className={form.errorMessage}>{loginError}</div>}
       </form>
     </main>
   );
