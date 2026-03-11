@@ -75,9 +75,6 @@ function page() {
   useEffect(() => {
     arrivalfetch();
   }, []);
-  // useEffect(() => {
-  //   console.log(reviews.filter((review) => review.rating > 3));
-  // }, [reviews]);
   if (!arrivals) {
     return <div>Loading...</div>;
   }

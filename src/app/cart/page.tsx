@@ -1,7 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/lib/hook";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
 import {
@@ -12,6 +12,7 @@ import {
 import { decreaseQuantity } from "@/lib/slices/cartSlice";
 import { deleteFromCart } from "@/lib/slices/cartSlice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type cart = {
   id: number;
@@ -24,6 +25,7 @@ type cart = {
 };
 
 function page() {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const cartProducts = useAppSelector((state) => state.cart.cartProducts);
   const totalPrice = useAppSelector(cartTotalPrice);
@@ -37,6 +39,21 @@ function page() {
   function handleDelete(itemId: number) {
     dispatch(deleteFromCart(itemId));
   }
+  const checkUser = () => {
+    const hasChecked = sessionStorage.getItem("hasChecked");
+    if (hasChecked) return;
+    const localUser = localStorage.getItem("localUser");
+    const sessionUser = sessionStorage.getItem("sessionUser");
+    if (!(localUser || sessionUser)) {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.reload();
+    }
+    sessionStorage.setItem("hasChecked", "true");
+  };
+  useEffect(() => {
+    checkUser();
+  }, []);
   if (cartProducts.length === 0) {
     return (
       <p className={styles.emptyCart}>

@@ -1,6 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import styles from "./page.module.scss";
+import Image from "next/image";
+import layout from "@/app/layout.module.scss";
 
 type user = {
   firstName: string;
@@ -21,15 +24,16 @@ function page() {
     const res = await fetch("https://dummyjson.com/auth/me", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${parsedToken.accessToken}`, // Pass JWT via Authorization header
+        Authorization: `Bearer ${parsedToken.accessToken}`,
       },
     });
-    // if (res.status === 401) {
-    //   console.log("Error");
-    // }
-    const result = await res.json();
-    setUserData(result);
-    console.log(result);
+    if (res.status === 401) {
+      localStorage.clear();
+      sessionStorage.clear();
+    } else {
+      const result = await res.json();
+      setUserData(result);
+    }
   };
   const checkUser = () => {
     const localUser = localStorage.getItem("localUser");
@@ -44,18 +48,40 @@ function page() {
   }, []);
   if (!userData) return <div>Loading...</div>;
   return (
-    <div>
-      <ul>
-        <li>{userData.firstName}</li>
-        <li>{userData.lastName}</li>
-        <li>{userData.gender}</li>
-        <li>{userData.email}</li>
-        <li>{userData.phone}</li>
-        <li>
-          <img src={userData.image} alt="profile image" />
-        </li>
-      </ul>
-    </div>
+    <main>
+      <div className={layout.innerContainer}>
+        <div className={styles.userProfile}>
+          <h1>Welcome {userData.firstName + userData.lastName}</h1>
+          <div className={styles.profileHeader}>
+            <Image
+              src={userData.image}
+              width={100}
+              height={100}
+              alt="user profile picture"
+            />
+          </div>
+          <div className={styles.profileBody}>
+            <div className={styles.profileDetails}>
+              <h4>name</h4>
+              <span>{userData.firstName}</span>
+            </div>
+            <div className={styles.profileDetails}>
+              <h4>gender</h4>
+              <span>{userData.gender}</span>
+            </div>
+            <div className={styles.profileDetails}>
+              <h4>email</h4>
+              <span>{userData.email}</span>
+            </div>
+            <div className={styles.profileDetails}>
+              <h4>phone</h4>
+              <span>{userData.phone}</span>
+            </div>
+            <button>log out</button>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
 
