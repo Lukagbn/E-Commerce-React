@@ -61,6 +61,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${satoshi.variable} ${integralCF.variable}`}>
+      <head>
+        <link rel="preload" href="/mainImage.svg" as="image" />
+      </head>
       <body className="antialiased">
         <StoreProvider>
           <Navbar />
