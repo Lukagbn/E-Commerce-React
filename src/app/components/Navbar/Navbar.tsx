@@ -30,21 +30,23 @@ function Navbar() {
     },
   ];
   const [active, setActive] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
-
-  const checkUser = () => {
-    if (typeof window === "undefined") return;
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return !!(
+      localStorage.getItem("localUser") || sessionStorage.getItem("sessionUser")
+    );
+  });
+  useEffect(() => {
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
-    setIsLoggedIn(!(localUser || sessionUser));
-  };
-  useEffect(() => {
-    checkUser();
+    const loggedIn = !!(localUser || sessionUser);
+    setIsLoggedIn(loggedIn);
+    document.body.style.paddingTop = loggedIn ? "0px" : "";
   }, [pathname]);
   return (
     <header>
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <div className={styles.promoBar}>
           <p>
             Sign up and get 20% off to your first order.{" "}
