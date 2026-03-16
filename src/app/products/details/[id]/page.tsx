@@ -95,20 +95,10 @@ function page() {
       }),
     );
   }
-  const checkUser = () => {
-    if (typeof window === "undefined") return;
-    const localUser = localStorage.getItem("localUser");
-    const sessionUser = sessionStorage.getItem("sessionUser");
-    if (!(localUser || sessionUser)) {
-      return false;
-    } else {
-      return true;
-    }
-  };
+
   useEffect(() => {
     fetchSingleProduct();
     fetchProductCards();
-    checkUser();
   }, []);
   if (!singleProduct) return <Loader />;
   return (
@@ -190,18 +180,12 @@ function page() {
                 <span>1</span>
                 <button>+</button>
               </div>
-              {checkUser() ? (
-                <button
-                  className={styles.addToCartBtn}
-                  onClick={() => handleAddToCart(singleProduct)}
-                >
-                  Add to Cart
-                </button>
-              ) : (
-                <Link href={"/login"} className={styles.addToCartBtn}>
-                  log in
-                </Link>
-              )}
+              <button
+                className={styles.addToCartBtn}
+                onClick={() => handleAddToCart(singleProduct)}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>

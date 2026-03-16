@@ -106,13 +106,16 @@ function page() {
           <div className={styles.totalContainer}>
             <h4>Order Summary</h4>
             <div className={styles.totalWrapper}>
-              <p>Total</p>
+              <p>Subtotal</p>
               <span>${totalPrice.toFixed(2)}</span>
             </div>
             <div className={styles.totalWrapper}>
-              <p>Discount({totalDiscount.toFixed(2)}%)</p>
+              <p>
+                Discount(
+                {(totalPrice - (totalPrice - totalDiscount)).toFixed(2)}%)
+              </p>
               <span className={styles.totalDiscount}>
-                -${(totalPrice - (totalPrice - totalDiscount)).toFixed(2)}
+                -${((totalPrice * totalDiscount) / 100).toFixed(2)}
               </span>
             </div>
             <div className={styles.totalWrapper}>
@@ -122,7 +125,12 @@ function page() {
             <hr />
             <div className={styles.totalWrapper}>
               <p>Total</p>
-              <span>${(totalPrice - totalDiscount).toFixed(2)}</span>
+              <span>
+                $
+                {(totalPrice - (totalPrice * totalDiscount) / 100 + 15).toFixed(
+                  2,
+                )}
+              </span>
             </div>
             <button>Proceed to Checkout</button>
           </div>
