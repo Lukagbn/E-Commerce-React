@@ -76,7 +76,7 @@ function page() {
   useEffect(() => {
     arrivalfetch();
   }, []);
-  if (arrivals) {
+  if (!arrivals) {
     return <Loader />;
   }
   return (

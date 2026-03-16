@@ -97,7 +97,7 @@ function page() {
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
-              {passwordVisible ? "show" : "hide"}
+              {passwordVisible ? "hide" : "show"}
             </button>
           </div>
           {errors.password && (
