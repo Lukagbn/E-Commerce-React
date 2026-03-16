@@ -126,17 +126,19 @@ function page() {
             <div className={styles.productThumbnails}>
               {singleProduct.images.length === 1
                 ? null
-                : singleProduct.images.map((item, index) => (
-                    <Image
-                      key={index}
-                      onClick={() => setActiveImage(index)}
-                      className={`${activeImage === index ? styles.activeImage : styles.productThumbnail}`}
-                      src={item}
-                      width={111}
-                      height={106}
-                      alt="image"
-                    />
-                  ))}
+                : singleProduct.images
+                    .slice(0, 3)
+                    .map((item, index) => (
+                      <Image
+                        key={index}
+                        onClick={() => setActiveImage(index)}
+                        className={`${activeImage === index ? styles.activeImage : styles.productThumbnail}`}
+                        src={item}
+                        width={111}
+                        height={106}
+                        alt="image"
+                      />
+                    ))}
             </div>
           </div>
           <div className={styles.productInfo}>
