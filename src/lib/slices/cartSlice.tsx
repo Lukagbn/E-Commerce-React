@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 
 interface CartItem {
   id: number;
@@ -13,7 +13,10 @@ interface CartState {
   cartProducts: CartItem[];
 }
 const initialState: CartState = {
-  cartProducts: [],
+  cartProducts:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userCart") || "[]")
+      : [],
 };
 
 const cartSlice = createSlice({
@@ -29,38 +32,37 @@ const cartSlice = createSlice({
           item.quantity += 1;
         }
       } else {
-        state.cartProducts.push({
-          ...action.payload,
-          quantity: 1,
-        });
+        state.cartProducts.push({ ...action.payload, quantity: 1 });
       }
+      localStorage.setItem("userCart", JSON.stringify(state.cartProducts));
     },
     deleteFromCart: (state, action: PayloadAction<number>) => {
       state.cartProducts = state.cartProducts.filter(
         (product) => product.id !== action.payload,
       );
+      localStorage.setItem("userCart", JSON.stringify(state.cartProducts));
     },
     decreaseQuantity: (state, action: PayloadAction<CartItem>) => {
       const index = state.cartProducts.findIndex(
         (product) => product.id === action.payload.id,
       );
-      if (state.cartProducts[index].quantity < 2) {
-        state.cartProducts[index].quantity = 1;
-      } else {
+      if (state.cartProducts[index].quantity > 1) {
         state.cartProducts[index].quantity -= 1;
+        localStorage.setItem("userCart", JSON.stringify(state.cartProducts));
+      } else {
+        state.cartProducts[index].quantity = 1;
       }
     },
   },
 });
-
 export const cartTotalPrice = (state: { cart: CartState }) =>
   state.cart.cartProducts.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
   );
-export const cartTotalDiscount = (state: { cart: CartState }) =>
+export const cartTotalDiscountPrice = (state: { cart: CartState }) =>
   state.cart.cartProducts.reduce(
-    (total, item) => total + item.discountPercentage,
+    (total, item) => total + (item.price * item.discountPercentage) / 100,
     0,
   );
 export const { addToCart, deleteFromCart, decreaseQuantity } =
