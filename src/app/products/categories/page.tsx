@@ -4,6 +4,9 @@ import Card, { CardProps } from "@/app/components/Card/Card";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
 import Loader from "@/app/components/Loader/Loader";
+import CategoryBtn from "@/app/components/CategoryButton/CategoryButton";
+import Link from "next/link";
+import CategoriesGrpoup from "@/app/components/CategoryGroup/CategoryGroup";
 
 function page() {
   const [categoryProducts, setCategoryProducts] = useState<CardProps[] | null>(
@@ -37,7 +40,12 @@ function page() {
   if (!categoryProducts) return <Loader />;
   return (
     <>
-      <div className={`${aside ? styles.overlay : ""}`}></div>
+      <div
+        onClick={() => {
+          setAside(false);
+        }}
+        className={`${aside ? styles.overlay : ""}`}
+      ></div>
       <main>
         <div className={`${styles.categoriesWrapper} ${layout.innerContainer}`}>
           <aside className={`${aside ? styles.asideActive : styles.aside}`}>
@@ -90,6 +98,8 @@ function page() {
                 onChange={(e) => setTitle(String(e.target.value))}
               />
             </div>
+            <hr />
+            <CategoriesGrpoup />
             <hr />
             <button
               className={styles.filterApplyBtn}

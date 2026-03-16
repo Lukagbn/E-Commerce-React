@@ -1,0 +1,19 @@
+.btn {
+  text-transform: capitalize;
+  background-color: #f0f0f0;
+  border-radius: 62px;
+  align-items: center;
+  height: 39px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.4s ease-in-out;
+  display: flex;
+  border: none;
+  outline: none;
+  color: #000000;
+  &:hover {
+    background-color: #000000;
+    color: #f0f0f0;
+  }
+}

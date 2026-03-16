@@ -33,18 +33,35 @@
 }
 .asideBase {
   max-width: 390px;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 18px;
+  padding-right: 10px;
   position: fixed;
   bottom: 0%;
   left: 50%;
   transform: translateX(-50%);
-  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+  border: 1px solid rgba(#000, 0.1);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: #ffff;
+  background-color: #fff;
   width: 100%;
   z-index: 11;
+  border-right: 5px solid transparent;
 
+  &::-webkit-scrollbar {
+    width: 1vw;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgb(133, 133, 133);
+    border-radius: 10px;
+    margin-block: 10px;
+  }
   .filterCloseBtn {
     position: absolute;
     right: 18px;
@@ -54,12 +71,10 @@
     color: rgba($color: #000000, $alpha: 0.4);
     cursor: pointer;
   }
-
   .filterProperty {
     display: flex;
     flex-direction: column;
     gap: 16px;
-
     input {
       height: 48px;
       background-color: transparent;
@@ -70,7 +85,6 @@
       font-size: 16px;
       padding-inline: 16px;
     }
-
     input[type="range"] {
       -webkit-appearance: none;
       width: 100%;
@@ -79,7 +93,6 @@
       border-radius: 2px;
       outline: none;
       padding-inline: 0px;
-
       &::-webkit-slider-thumb {
         -webkit-appearance: none;
         width: 20px;
@@ -90,11 +103,9 @@
       }
     }
   }
-
   hr {
     margin-block: 24px;
   }
-
   .filterApplyBtn {
     margin-top: 24px;
     height: 48px;
@@ -126,6 +137,7 @@
       z-index: 1;
       display: block;
       max-width: 295px;
+      max-height: unset;
       position: static;
       transform: none;
       border: 1px solid rgba(0, 0, 0, 0.1);

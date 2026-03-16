@@ -5,6 +5,7 @@ import Card, { CardProps } from "@/app/components/Card/Card";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
 import Loader from "@/app/components/Loader/Loader";
+import CategoryGroup from "@/app/components/CategoryGroup/CategoryGroup";
 
 function page() {
   const { slug } = useParams();
@@ -78,6 +79,8 @@ function page() {
                 onChange={(e) => setStarRate(Number(e.target.value))}
               />
             </div>
+            <hr />
+            <CategoryGroup />
             <hr />
             <div className={styles.filterProperty}>
               <h4>Search By Title</h4>
