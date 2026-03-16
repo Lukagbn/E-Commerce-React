@@ -37,7 +37,12 @@ function page() {
   if (!categoryProducts) return <Loader />;
   return (
     <>
-      <div className={`${aside ? styles.overlay : ""}`}></div>
+      <div
+        onClick={() => {
+          setAside(false);
+        }}
+        className={`${aside ? styles.overlay : ""}`}
+      ></div>
       <main>
         <div className={`${styles.categoriesWrapper} ${layout.innerContainer}`}>
           <aside className={`${aside ? styles.asideActive : styles.aside}`}>
