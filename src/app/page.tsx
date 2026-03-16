@@ -8,9 +8,9 @@ function page() {
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
     if (localUser || sessionUser) {
-      router.push("/products");
+      router.push("/profile");
     } else {
-      router.push("/login");
+      router.push("/products");
     }
   };
   useEffect(() => {

@@ -117,22 +117,6 @@
   @extend .asideBase;
   display: block;
 }
-.loading {
-  text-align: center;
-  font-family: var(--font-integral);
-  animation: 1s loader infinite;
-}
-@keyframes loader {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 @media (min-width: 1240px) {
   .categoriesWrapper {
     display: flex;

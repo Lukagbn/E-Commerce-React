@@ -10,6 +10,7 @@ import { CardProps } from "@/app/components/Card/Card";
 import { useAppDispatch } from "@/lib/hook";
 import { addToCart } from "@/lib/slices/cartSlice";
 import Link from "next/link";
+import Loader from "@/app/components/Loader/Loader";
 
 interface reviewsType {
   rating: number;
@@ -109,7 +110,7 @@ function page() {
     fetchProductCards();
     checkUser();
   }, []);
-  if (!singleProduct) return <p>Loading...</p>;
+  if (!singleProduct) return <Loader />;
   return (
     <main>
       <section className={`${styles.productGallery} ${layout.container}`}>

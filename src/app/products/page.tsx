@@ -8,6 +8,7 @@ import Card from "../components/Card/Card";
 import StarRate from "../components/StarRate/StarRate";
 import ProductCard from "../components/ProductCard/ProductCard";
 import { CardProps } from "../components/Card/Card";
+import Loader from "../components/Loader/Loader";
 
 type reviewsType = {
   id: number;
@@ -75,8 +76,8 @@ function page() {
   useEffect(() => {
     arrivalfetch();
   }, []);
-  if (!arrivals) {
-    return <div className={styles.loading}>Loading...</div>;
+  if (arrivals) {
+    return <Loader />;
   }
   return (
     <main className={layout.container}>

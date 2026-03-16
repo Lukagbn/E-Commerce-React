@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import Image from "next/image";
 import layout from "@/app/layout.module.scss";
+import Loader from "../components/Loader/Loader";
 
 type user = {
   firstName: string;
@@ -54,7 +55,7 @@ function page() {
     fetchUser();
     checkUser();
   }, []);
-  if (!userData) return <div className={styles.loading}>Loading...</div>;
+  if (!userData) return <Loader />;
   return (
     <main>
       <div className={layout.innerContainer}>

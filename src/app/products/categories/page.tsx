@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Card, { CardProps } from "@/app/components/Card/Card";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
+import Loader from "@/app/components/Loader/Loader";
 
 function page() {
   const [categoryProducts, setCategoryProducts] = useState<CardProps[] | null>(
@@ -33,8 +34,7 @@ function page() {
       document.documentElement.style.overflow = "";
     }
   }, [aside]);
-  if (!categoryProducts)
-    return <div className={styles.loading}>loading...</div>;
+  if (!categoryProducts) return <Loader />;
   return (
     <>
       <div className={`${aside ? styles.overlay : ""}`}></div>

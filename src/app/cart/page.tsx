@@ -37,35 +37,12 @@ function page() {
   function handleDelete(itemId: number) {
     dispatch(deleteFromCart(itemId));
   }
-  const checkUser = () => {
-    if (typeof window === "undefined") return;
-    const localUser = localStorage.getItem("localUser");
-    const sessionUser = sessionStorage.getItem("sessionUser");
-    if (!(localUser || sessionUser)) {
-      localStorage.clear();
-      sessionStorage.clear();
-      return false;
-    } else {
-      return true;
-    }
-  };
-  console.log(checkUser());
-  useEffect(() => {
-    checkUser();
-  }, []);
   if (cartProducts.length === 0) {
     return (
       <div className={styles.emptyCart}>
-        {checkUser() ? (
-          <p>Your cart is empty</p>
-        ) : (
-          <p>you must log in to use cart</p>
-        )}
-        {checkUser() ? (
-          <Link href={"/products/categories"}>Browse products</Link>
-        ) : (
-          <Link href={"/login"}>Log In</Link>
-        )}
+        <p>Your cart is empty</p>
+
+        <Link href={"/products/categories"}>Browse products</Link>
       </div>
     );
   }
