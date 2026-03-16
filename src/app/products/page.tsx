@@ -187,7 +187,7 @@ function page() {
               <span>smartphones</span>
             </div>
             <div className={styles.categoriesBox}>
-              <Link href={"/products/categories/smartphones/fragrances"}>
+              <Link href={"/products/categories/fragrances"}>
                 <Image
                   src={"/fragrances.webp"}
                   width={310}
@@ -198,7 +198,7 @@ function page() {
               <span>fragrances</span>
             </div>
             <div className={styles.categoriesBox}>
-              <Link href={"/products/categories/smartphones/sunglasses"}>
+              <Link href={"/products/categories/sunglasses"}>
                 <Image
                   src={"/sunglasses.webp"}
                   width={310}
