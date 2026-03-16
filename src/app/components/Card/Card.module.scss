@@ -6,6 +6,10 @@
     color: rgba(0, 0, 0, 1);
     line-height: 100%;
     font-size: 13px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   img {
     background: rgba(240, 238, 237, 1);
