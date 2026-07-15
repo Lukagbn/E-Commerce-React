@@ -57,6 +57,7 @@ function Navbar() {
       <div className={`${styles.navbar}  ${layout.innerContainer}`}>
         <div className={styles.brand}>
           <button
+            aria-label="burger menu"
             className={`${active ? styles.burgerBtnActive : styles.burgerBtn}`}
             onClick={() => setActive(!active)}
           >

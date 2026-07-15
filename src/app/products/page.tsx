@@ -81,6 +81,12 @@ function page() {
   }
   return (
     <main className={layout.container}>
+      <link
+        rel="preload"
+        href="/mainImage.webp"
+        as="image"
+        fetchPriority="high"
+      />
       <section className={styles.mainHeadingContainer}>
         <div
           className={`${styles.mainHeadingContainerWrapper} ${layout.innerContainer}`}
@@ -167,6 +173,7 @@ function page() {
             <div className={styles.categoriesBox}>
               <Link href={"/products/categories/beauty"}>
                 <Image
+                  quality={95}
                   src={"/beauty.webp"}
                   width={310}
                   height={190}
@@ -178,6 +185,7 @@ function page() {
             <div className={styles.categoriesBox}>
               <Link href={"/products/categories/smartphones"}>
                 <Image
+                  quality={95}
                   src={"/smartphones.webp"}
                   width={310}
                   height={190}
@@ -189,6 +197,7 @@ function page() {
             <div className={styles.categoriesBox}>
               <Link href={"/products/categories/fragrances"}>
                 <Image
+                  quality={95}
                   src={"/fragrances.webp"}
                   width={310}
                   height={190}
@@ -200,6 +209,7 @@ function page() {
             <div className={styles.categoriesBox}>
               <Link href={"/products/categories/sunglasses"}>
                 <Image
+                  quality={95}
                   src={"/sunglasses.webp"}
                   width={310}
                   height={190}

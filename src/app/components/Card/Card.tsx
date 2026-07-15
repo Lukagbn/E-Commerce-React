@@ -17,7 +17,13 @@ function Card({ id, title, price, rating, images, className }: CardProps) {
   return (
     <div className={`${styles.card} ${className}`}>
       <Link href={`/products/details/${id}`}>
-        <Image src={`${images[0]}`} width={198} height={200} alt="product" />
+        <Image
+          src={images[0]}
+          alt="product"
+          width={295}
+          height={298}
+          sizes="(min-width: 1400px) 295px, 200px"
+        />
       </Link>
       <p>{title}</p>
       <StarRate ratingNumber={true} rating={rating} />
