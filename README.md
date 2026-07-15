@@ -65,11 +65,13 @@ initialState: {
 ```
 
 Actions:
+
 - `addToCart` – adds product or increases quantity (max 10)
 - `deleteFromCart` – removes product by id
 - `decreaseQuantity` – decreases quantity (minimum 1)
 
 Selectors:
+
 - `cartTotalPrice` – calculates total price across all cart items
 - `cartTotalDiscount` – calculates total discount percentage
 
@@ -111,7 +113,6 @@ src/
 │   ├── globals.scss
 │   ├── layout.module.scss
 │   ├── layout.tsx
-│   ├── page.module.css
 │   ├── page.tsx
 │   └── StoreProvider.tsx
 │
