@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import styles from "./Navbar.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -31,12 +32,8 @@ function Navbar() {
   ];
   const [active, setActive] = useState(false);
   const pathname = usePathname();
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return !!(
-      localStorage.getItem("localUser") || sessionStorage.getItem("sessionUser")
-    );
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
@@ -74,15 +71,17 @@ function Navbar() {
               />
             </svg>
           </button>
-          <Link href={"/products"}>
+          <Link href={"/"}>
             <span className={styles.logo}>SHOP.CO</span>
           </Link>
         </div>
-        <nav className={`${active ? styles.navACtive : styles.nav}`}>
+        <nav className={`${active ? styles.navActive : styles.nav}`}>
           <ul className={styles.navList}>
             {NAV_LIST.map((list) => (
               <li key={list.title}>
-                <Link href={list.href}>{list.title}</Link>
+                <Link href={list.href} onClick={() => setActive(false)}>
+                  {list.title}
+                </Link>
               </li>
             ))}
           </ul>
