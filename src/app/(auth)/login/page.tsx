@@ -63,7 +63,7 @@ function page() {
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
     if (localUser || sessionUser) {
-      router.push("/products");
+      router.push("/");
     }
   };
   useEffect(() => {

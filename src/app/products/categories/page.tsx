@@ -4,8 +4,6 @@ import Card, { CardProps } from "@/app/components/Card/Card";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
 import Loader from "@/app/components/Loader/Loader";
-import CategoryBtn from "@/app/components/CategoryButton/CategoryButton";
-import Link from "next/link";
 import CategoriesGrpoup from "@/app/components/CategoryGroup/CategoryGroup";
 
 function page() {
