@@ -1,7 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/lib/hook";
 import Image from "next/image";
-import React, { useEffect } from "react";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
 import {

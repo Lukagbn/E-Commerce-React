@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Footer.module.scss";
 import Image from "next/image";
 import layout from "@/app/layout.module.scss";
@@ -78,7 +77,7 @@ function Footer() {
       alt: "mastercard",
     },
     {
-      img: "/paypal.png",
+      img: "/payPal.png",
       alt: "paypal",
     },
     {
@@ -111,7 +110,7 @@ function Footer() {
       </div>
       <div className={`${styles.footerMain} ${layout.innerContainer}`}>
         <div className={styles.footerBrand}>
-          <h2 className={styles.logo}>SHOP.CO</h2>
+          <h3 className={styles.logo}>SHOP.CO</h3>
           <p>
             We have clothes that suits your style and which you’re proud to
             wear. From women to men.

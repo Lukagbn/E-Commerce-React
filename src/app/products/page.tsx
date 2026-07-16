@@ -2,9 +2,8 @@
 import Image from "next/image";
 import layout from "../layout.module.scss";
 import styles from "./page.module.scss";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Card from "../components/Card/Card";
 import StarRate from "../components/StarRate/StarRate";
 import ProductCard from "../components/ProductCard/ProductCard";
 import { CardProps } from "../components/Card/Card";
@@ -105,7 +104,7 @@ function page() {
             </Link>
             <div className={styles.overviewContainer}>
               <div className={styles.overviewBox}>
-                <h3>200+</h3>
+                <h2>200+</h2>
                 <p>International Brands</p>
               </div>
               <Image
@@ -115,11 +114,11 @@ function page() {
                 height={52}
               ></Image>
               <div className={styles.overviewBox}>
-                <h3>2,000+</h3>
+                <h2>2,000+</h2>
                 <p>High-Quality Products</p>
               </div>
               <div className={styles.overviewBox}>
-                <h3>30,000+</h3>
+                <h2>30,000+</h2>
                 <p>Happy Customers</p>
               </div>
             </div>
@@ -224,9 +223,9 @@ function page() {
       <section className={`${styles.feedBack} ${layout.innerContainer}`}>
         <div className={styles.feedBackContainer}>
           <div className={styles.feedBackHeaderWrapper}>
-            <h2>
+            <h3>
               OUR HAPPY <span>CUSTOMERS</span>
-            </h2>
+            </h3>
             <div className={styles.feedBackBtnContainer}>
               <button className={styles.arrowBtn} onClick={() => scrollLeft()}>
                 <Image
@@ -252,7 +251,7 @@ function page() {
               .map((review, index) => (
                 <div key={index} className={styles.reviewCard}>
                   <StarRate ratingNumber={false} rating={review.rating} />
-                  <h4>
+                  <h3>
                     {review.reviewerName}{" "}
                     <Image
                       src={"/check.png"}
@@ -260,7 +259,7 @@ function page() {
                       height={19}
                       alt="check mark"
                     />
-                  </h4>
+                  </h3>
                   <p>"{review.comment}"</p>
                 </div>
               ))}

@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import Image from "next/image";
 import layout from "@/app/layout.module.scss";

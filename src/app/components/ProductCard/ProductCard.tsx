@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./ProductCard.module.scss";
 import layout from "@/app/layout.module.scss";
 import Card from "../Card/Card";

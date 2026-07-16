@@ -162,6 +162,12 @@
           height: 13px;
         }
       }
+      .paymentMethods .paymentItem:nth-of-type(3) {
+        img {
+          width: 30px;
+          height: 8px;
+        }
+      }
     }
   }
 }

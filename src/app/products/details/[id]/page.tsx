@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
 import StarRate from "@/app/components/StarRate/StarRate";
@@ -9,7 +9,6 @@ import ProductCard from "@/app/components/ProductCard/ProductCard";
 import { CardProps } from "@/app/components/Card/Card";
 import { useAppDispatch } from "@/lib/hook";
 import { addToCart } from "@/lib/slices/cartSlice";
-import Link from "next/link";
 import Loader from "@/app/components/Loader/Loader";
 
 interface reviewsType {

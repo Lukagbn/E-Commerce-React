@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./CategoryGroup.module.scss";
 import CategoryBtn from "../CategoryButton/CategoryButton";
 

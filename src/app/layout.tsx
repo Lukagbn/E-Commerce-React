@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Navbar from "@/app/components/Navbar/Navbar";
 import "./globals.scss";
-import Footer from "@/app/components/Footer/Footer";
 import StoreProvider from "./StoreProvider";
+import dynamic from "next/dynamic";
+
+const Footer = dynamic(() => import("@/app/components/Footer/Footer"), {
+  ssr: true,
+});
 
 const satoshi = localFont({
   src: [
@@ -26,6 +30,7 @@ const satoshi = localFont({
   display: "swap",
   variable: "--font-satoshi",
 });
+
 const integralCF = localFont({
   src: [
     {
