@@ -43,8 +43,6 @@
       text-transform: capitalize;
       font-weight: 500;
       color: #000;
-      background-color: #0000;
-      border: 1px solid #000;
       border-radius: 62px;
       outline: none;
       justify-content: center;
@@ -53,12 +51,15 @@
       max-width: 235px;
       margin-inline: auto;
       height: 48px;
-      transition: all 0.4s ease-in-out;
+      transition: all 0.2s ease-in-out;
       display: flex;
+      background-color: #fbf9f9;
+      border: 1px solid black;
+      box-shadow: 4px 7px 0px 1px #000000;
       &:hover {
-        scale: 0.95;
-        background-color: #000;
+        background-color: #000000;
         color: #ffff;
+        box-shadow: 0px 0px 0px 0px;
       }
     }
   }

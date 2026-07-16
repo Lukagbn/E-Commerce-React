@@ -1,6 +1,10 @@
 .card {
   max-width: 200px;
   width: 100%;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    scale: 0.9;
+  }
   p {
     font-weight: 700;
     color: rgba(0, 0, 0, 1);

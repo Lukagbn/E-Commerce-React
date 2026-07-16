@@ -55,19 +55,20 @@
     }
     .logInBtn {
       height: 48px;
-      background-color: transparent;
       color: #000000;
-      border: 1px solid #000000;
       cursor: pointer;
       transition: 0.4s ease-in-out;
       border-radius: 62px;
       font-size: 14px;
       font-weight: 500;
       text-transform: capitalize;
+      background-color: #fbf9f9;
+      border: 1px solid black;
+      box-shadow: 4px 7px 0px 1px #000000;
       &:hover {
-        scale: 0.95;
         background-color: #000000;
         color: #ffff;
+        box-shadow: 0px 0px 0px 0px;
       }
     }
     .link {
