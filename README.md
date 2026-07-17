@@ -2,7 +2,7 @@
 
 A high-performance, fully responsive e-commerce application built with Next.js (App Router) and TypeScript. Shop.co delivers a seamless shopping experience across all device sizes, featuring Redux Toolkit for state management, DummyJSON API for dynamic data, and client-side form validation powered by React Hook Form and Yup.
 
-🔗 **Live Demo:** [e-commerce-react-pi-sandy.vercel.app](https://e-commerce-react-pi-sandy.vercel.app/login)
+🔗 **Live Demo:** [e-commerce-react-pi-sandy.vercel.app](https://e-commerce-react-pi-sandy.vercel.app/)
 
 ## 🧰 Tech Stack
 
