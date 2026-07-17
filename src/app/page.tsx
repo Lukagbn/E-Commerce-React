@@ -236,6 +236,7 @@ function page() {
                 onClick={() => scrollLeft()}
                 onMouseEnter={() => setLeftArrowHover(true)}
                 onMouseLeave={() => setLeftArrowHover(false)}
+                aria-label="left arrow button"
               >
                 <LeftArrow hovered={leftArrowHover} />
               </button>
@@ -244,6 +245,7 @@ function page() {
                 onClick={() => scrollRight()}
                 onMouseEnter={() => setRightArrowHover(true)}
                 onMouseLeave={() => setRightArrowHover(false)}
+                aria-label="right arrow button"
               >
                 <RightArrow hovered={rightArrowHover} />
               </button>
