@@ -9,35 +9,39 @@ import Loader from "../components/Loader/Loader";
 type user = {
   firstName: string;
   lastName: string;
+  userName: string;
   email: string;
-  gender: string;
-  image: string;
-  phone: string;
+  gender: boolean;
+  image?: string;
 };
 
 function page() {
   const router = useRouter();
   const [userData, setUserData] = useState<user | null>(null);
+
   const fetchUser = async () => {
     const token =
       localStorage.getItem("token") || sessionStorage.getItem("token");
-    if (token !== null) {
-      const parsedToken = token ? JSON.parse(token) : null;
-      const res = await fetch("https://dummyjson.com/auth/me", {
+
+    if (token) {
+      const res = await fetch("http://localhost:4000/auth/me", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${parsedToken.accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
+
       if (res.status === 401) {
         localStorage.clear();
         sessionStorage.clear();
+        router.push("/login");
       } else {
         const result = await res.json();
-        setUserData(result);
+        setUserData(result.user);
       }
     }
   };
+
   const checkUser = () => {
     if (typeof window === "undefined") return;
     const localUser = localStorage.getItem("localUser");
@@ -46,24 +50,30 @@ function page() {
       router.push("/login");
     }
   };
+
   function logOut() {
     localStorage.clear();
     sessionStorage.clear();
-    window.location.reload();
+    router.push("/login");
   }
+
   useEffect(() => {
-    fetchUser();
     checkUser();
+    fetchUser();
   }, []);
+
   if (!userData) return <Loader />;
+
   return (
     <main>
       <div className={layout.innerContainer}>
         <div className={styles.userProfile}>
-          <h1>Welcome {userData.firstName + userData.lastName}</h1>
+          <h1>
+            Welcome {userData.firstName} {userData.lastName}
+          </h1>
           <div className={styles.profileHeader}>
             <Image
-              src={userData.image}
+              src={userData.image || "/casual.webp"}
               width={100}
               height={100}
               alt="user profile picture"
@@ -76,17 +86,17 @@ function page() {
             </div>
             <div className={styles.profileDetails}>
               <h4>gender</h4>
-              <span>{userData.gender}</span>
+              <span>{userData.gender ? "Male" : "Female"}</span>
             </div>
             <div className={styles.profileDetails}>
               <h4>email</h4>
               <span>{userData.email}</span>
             </div>
             <div className={styles.profileDetails}>
-              <h4>phone</h4>
-              <span>{userData.phone}</span>
+              <h4>username</h4>
+              <span>{userData.userName}</span>
             </div>
-            <button onClick={() => logOut()}>log out</button>
+            <button onClick={logOut}>log out</button>
           </div>
         </div>
       </div>

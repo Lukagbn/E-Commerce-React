@@ -6,13 +6,9 @@ import { useForm } from "react-hook-form";
 import form from "../form.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { stringify } from "querystring";
 
 const schema = yup.object({
-  username: yup
-    .string()
-    .required("Username is required")
-    .min(4, "Username must be at least 4 characters"),
+  email: yup.string().required("Email is required!").email("Incorrect email!"),
   password: yup
     .string()
     .required("Password is required")
@@ -31,25 +27,29 @@ function page() {
   const [loginError, setLoginError] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [checked, setChecked] = useState(false);
-  const handleLogIn = async (data: { username: string; password: string }) => {
+  const handleLogIn = async (data: { email: string; password: string }) => {
     try {
-      const res = await fetch("https://dummyjson.com/auth/login", {
+      const res = await fetch("http://localhost:4000/auth/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+
       if (!res.ok) {
         setLoginError("Incorrect login information");
         return;
       }
+
       const result = await res.json();
+
       if (checked) {
         localStorage.setItem("localUser", "true");
-        localStorage.setItem("token", JSON.stringify(result));
+        localStorage.setItem("token", result.token);
       } else {
         sessionStorage.setItem("sessionUser", "true");
-        sessionStorage.setItem("token", JSON.stringify(result));
+        sessionStorage.setItem("token", result.token);
       }
+
       router.push("/");
     } catch (error) {
       console.error("error", error);
@@ -78,10 +78,10 @@ function page() {
       >
         <h1 className={form.formHeader}>log in</h1>
         <div className={form.formGroup}>
-          <label htmlFor="username">Username</label>
-          <input id="username" type="text" {...register("username")} />
-          {errors.username && (
-            <span className={form.errorMessage}>{errors.username.message}</span>
+          <label htmlFor="username">Email</label>
+          <input id="username" type="text" {...register("email")} />
+          {errors.email && (
+            <span className={form.errorMessage}>{errors.email.message}</span>
           )}
         </div>
         <div className={form.formGroup}>
