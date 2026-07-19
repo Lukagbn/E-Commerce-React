@@ -67,6 +67,8 @@ export const cartTotalPrice = (state: { cart: CartState }) =>
     (total, item) => total + item.price * item.quantity,
     0,
   );
+export const totalCount = (state: { cart: CartState }) =>
+  state.cart.cartProducts.reduce((total, item) => total + item.quantity, 0);
 export const cartTotalDiscountPrice = (state: { cart: CartState }) =>
   state.cart.cartProducts.reduce(
     (total, item) => total + (item.price * item.discountPercentage) / 100,
@@ -78,4 +80,5 @@ export const {
   decreaseQuantity,
   loadCartFromStorage,
 } = cartSlice.actions;
+
 export default cartSlice.reducer;

@@ -5,6 +5,7 @@ import Navbar from "@/app/components/Navbar/Navbar";
 import "./globals.scss";
 import StoreProvider from "./StoreProvider";
 import dynamic from "next/dynamic";
+import CartInitializer from "./components/CartInitializer";
 
 const Footer = dynamic(() => import("@/app/components/Footer/Footer"), {
   ssr: true,
@@ -70,6 +71,7 @@ export default function RootLayout({
       <body className="antialiased">
         <StoreProvider>
           <Navbar />
+          <CartInitializer />
           {children}
           <Footer />
         </StoreProvider>

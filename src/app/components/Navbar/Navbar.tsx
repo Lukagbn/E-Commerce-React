@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import layout from "@/app/layout.module.scss";
 import { usePathname } from "next/navigation";
+import { totalCount } from "@/lib/slices/cartSlice";
+import { useAppSelector } from "@/lib/hook";
 
 function Navbar() {
   const NAV_LIST = [
@@ -33,14 +35,16 @@ function Navbar() {
   const [active, setActive] = useState(false);
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const totalItemsCount = useAppSelector(totalCount);
 
   useEffect(() => {
+    console.log(totalItemsCount);
     const localUser = localStorage.getItem("localUser");
     const sessionUser = sessionStorage.getItem("sessionUser");
     const loggedIn = !!(localUser || sessionUser);
     setIsLoggedIn(loggedIn);
     document.body.style.paddingTop = loggedIn ? "0px" : "";
-  }, [pathname]);
+  }, [pathname, totalItemsCount]);
   return (
     <header>
       {!isLoggedIn ? (
@@ -101,13 +105,14 @@ function Navbar() {
               alt="search icon"
             ></Image>
           </Link>
-          <Link href={"/cart"}>
+          <Link href={"/cart"} className={styles.cart}>
             <Image
               src={"/cart.svg"}
               width={24}
               height={24}
               alt="cart icon"
             ></Image>
+            <span>{totalItemsCount}</span>
           </Link>
           <Link href={"/profile"}>
             <Image

@@ -7,10 +7,12 @@ import {
   addToCart,
   cartTotalDiscountPrice,
   cartTotalPrice,
+  loadCartFromStorage,
 } from "@/lib/slices/cartSlice";
 import { decreaseQuantity } from "@/lib/slices/cartSlice";
 import { deleteFromCart } from "@/lib/slices/cartSlice";
 import Link from "next/link";
+import { useEffect } from "react";
 
 type cart = {
   _id: string;
@@ -27,6 +29,7 @@ function page() {
   const cartProducts = useAppSelector((state) => state.cart.cartProducts);
   const totalPrice = useAppSelector(cartTotalPrice);
   const totalDiscountPrice = useAppSelector(cartTotalDiscountPrice);
+
   function handleIncrease(card: cart) {
     dispatch(addToCart({ ...card, quantity: 1 }));
   }
@@ -36,6 +39,11 @@ function page() {
   function handleDelete(itemId: string) {
     dispatch(deleteFromCart(itemId));
   }
+
+  useEffect(() => {
+    dispatch(loadCartFromStorage());
+  }, [dispatch]);
+
   if (cartProducts.length === 0) {
     return (
       <div className={styles.emptyCart}>
