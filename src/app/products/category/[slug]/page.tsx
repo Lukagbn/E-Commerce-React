@@ -16,11 +16,13 @@ function page() {
   const [starRate, setStarRate] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [aside, setAside] = useState(false);
-  const [appliedPrice, setAppliedPrice] = useState<number>(1000);
+  const [appliedPrice, setAppliedPrice] = useState<number>(10000);
   const [appliedStarRate, setAppliedStarRate] = useState<number>(0);
   const [appliedTitle, setAppliedTitle] = useState<string>("");
   const fetchCategoryProducts = async () => {
-    const res = await fetch(`https://dummyjson.com/products/category/${slug}`);
+    const res = await fetch(
+      `https://e-commerce-react-db.onrender.com/products/category/${slug}`,
+    );
     const result = await res.json();
     setCategoryProducts(result.products);
   };
@@ -65,7 +67,7 @@ function page() {
                 name="range"
                 id="range"
                 min={0}
-                max={1000}
+                max={10000}
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
               />
@@ -132,7 +134,7 @@ function page() {
             <div className={styles.cardContainer}>
               {categoryProducts
                 ?.filter((product) => product.price <= appliedPrice)
-                .filter((product) => product.rating >= appliedStarRate)
+                .filter((product) => product.rating <= appliedStarRate)
                 .filter((product) =>
                   appliedTitle === ""
                     ? true
@@ -143,7 +145,7 @@ function page() {
                 .map((card, index) => (
                   <Card
                     key={index}
-                    id={card.id}
+                    _id={card._id}
                     title={card.title}
                     price={card.price}
                     rating={card.rating}

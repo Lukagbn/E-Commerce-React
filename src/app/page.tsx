@@ -18,6 +18,7 @@ type reviewsType = {
 type Review = {
   reviewerName: string;
   comment: string;
+  userName: string;
   rating: number;
 };
 function page() {
@@ -29,21 +30,19 @@ function page() {
   const containerRef = useRef<HTMLDivElement>(null);
   const arrivalfetch = async () => {
     const arrivalsResponse = await fetch(
-      "https://dummyjson.com/products?limit=4&skip=4&select=title,images,price,rating",
+      `https://e-commerce-react-db.onrender.com/products?page=1&limit=4`,
     );
     const arrivalsData = await arrivalsResponse.json();
     const topSellingResponse = await fetch(
-      "https://dummyjson.com/products?limit=4&skip=10&select=title,images,price,rating",
+      `https://e-commerce-react-db.onrender.com/products?page=2&limit=4`,
     );
     const topSellingData = await topSellingResponse.json();
     const reviewResponse = await fetch(
-      "https://dummyjson.com/products?limit=3",
+      "https://e-commerce-react-db.onrender.com/reviews/top",
     );
     const reviewData = await reviewResponse.json();
-    const allReviews = reviewData.products.flatMap(
-      (product: reviewsType) => product.reviews,
-    );
-    setReviews(allReviews);
+
+    setReviews(reviewData.allReviews);
     setArrivals(arrivalsData.products);
     settopSelling(topSellingData.products);
   };
@@ -103,7 +102,7 @@ function page() {
               designed to bring out your individuality and cater to your sense
               of style.
             </p>
-            <Link href={"/products/categories"} className={styles.shopNow}>
+            <Link href={"/products/category"} className={styles.shopNow}>
               Shop Now
             </Link>
             <div className={styles.overviewContainer}>
@@ -174,7 +173,7 @@ function page() {
           </h2>
           <div className={styles.categoriesWrapper}>
             <div className={styles.categoriesBox}>
-              <Link href={"/products/categories/beauty"}>
+              <Link href={"/products/category/beauty"}>
                 <Image
                   quality={95}
                   src={"/beauty.webp"}
@@ -186,7 +185,7 @@ function page() {
               <span>beauty</span>
             </div>
             <div className={styles.categoriesBox}>
-              <Link href={"/products/categories/smartphones"}>
+              <Link href={"/products/category/smartphones"}>
                 <Image
                   quality={95}
                   src={"/smartphones.webp"}
@@ -198,7 +197,7 @@ function page() {
               <span>smartphones</span>
             </div>
             <div className={styles.categoriesBox}>
-              <Link href={"/products/categories/fragrances"}>
+              <Link href={"/products/category/fragrances"}>
                 <Image
                   quality={95}
                   src={"/fragrances.webp"}
@@ -210,7 +209,7 @@ function page() {
               <span>fragrances</span>
             </div>
             <div className={styles.categoriesBox}>
-              <Link href={"/products/categories/sunglasses"}>
+              <Link href={"/products/category/sunglasses"}>
                 <Image
                   quality={95}
                   src={"/sunglasses.webp"}
@@ -252,23 +251,13 @@ function page() {
             </div>
           </div>
           <div className={styles.reviewsWrapper} ref={containerRef}>
-            {reviews
-              .filter((review) => review.rating >= 4)
-              .map((review, index) => (
-                <div key={index} className={styles.reviewCard}>
-                  <StarRate ratingNumber={false} rating={review.rating} />
-                  <h3>
-                    {review.reviewerName}{" "}
-                    <Image
-                      src={"/check.png"}
-                      width={19}
-                      height={19}
-                      alt="check mark"
-                    />
-                  </h3>
-                  <p>"{review.comment}"</p>
-                </div>
-              ))}
+            {reviews.map((review, index) => (
+              <div key={index} className={styles.reviewCard}>
+                <StarRate ratingNumber={false} rating={review.rating} />
+                <h3>{review.userName} </h3>
+                <p>"{review.comment}"</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

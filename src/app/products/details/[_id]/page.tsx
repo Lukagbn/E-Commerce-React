@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
@@ -15,11 +15,10 @@ interface reviewsType {
   rating: number;
   comment: string;
   date: string;
-  reviewerName: string;
-  reviewerEmail: string;
+  userName: string;
 }
 interface singleProductType extends reviewsType {
-  id: string;
+  _id: string;
   title: string;
   rating: number;
   images: string[];
@@ -28,20 +27,19 @@ interface singleProductType extends reviewsType {
   description: string;
   tags: string[];
   brand: string;
-  sku: string;
-  weight: number;
-  dimensions: {
-    width: number;
-    height: number;
-    depth: number;
-  };
+  width: number;
+  height: number;
+  depth: number;
+  barcode: number;
   warrantyInformation: string;
   shippingInformation: string;
   availabilityStatus: string;
+  createdAt?: Date;
   reviews: reviewsType[];
 }
 function page() {
-  const { id } = useParams();
+  const { _id } = useParams();
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const [singleProduct, setSingleProduct] = useState<singleProductType | null>(
     null,
@@ -49,13 +47,15 @@ function page() {
   const [cardProducts, setcardProducts] = useState<CardProps[] | null>(null);
   const [activeImage, setActiveImage] = useState<number>(2);
   const [activeIndex, setActiveIndex] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [reviews, setReviews] = useState<reviewsType[]>([]);
   const buttons = ["Product Details", "Rating & Reviews", "FAQs"];
   const details = [
     { label: "Brand", value: singleProduct?.brand },
-    { label: "Sku", value: singleProduct?.sku },
-    { label: "Depth", value: singleProduct?.dimensions.depth },
-    { label: "Height", value: singleProduct?.dimensions.height },
-    { label: "Width", value: singleProduct?.dimensions.width },
+    { label: "Barcode", value: singleProduct?.barcode },
+    { label: "Depth", value: singleProduct?.depth },
+    { label: "Height", value: singleProduct?.height },
+    { label: "Width", value: singleProduct?.width },
     {
       label: "Warranty Information",
       value: singleProduct?.warrantyInformation,
@@ -67,16 +67,25 @@ function page() {
     { label: "Availability Status", value: singleProduct?.availabilityStatus },
   ];
   const fetchSingleProduct = async () => {
-    const res = await fetch(`https://dummyjson.com/products/${id}`);
-    const result: singleProductType = await res.json();
-    setSingleProduct(result);
+    const res = await fetch(
+      `https://e-commerce-react-db.onrender.com/products/${_id}`,
+    );
+    const result = await res.json();
+    setSingleProduct(result.product);
   };
   const fetchProductCards = async () => {
     const res = await fetch(
-      "https://dummyjson.com/products?limit=4&skip=5&select=id,title,price,rating,images",
+      "https://e-commerce-react-db.onrender.com/products?page=1&limit=4",
     );
     const result = await res.json();
     setcardProducts(result.products);
+  };
+  const fetchReview = async () => {
+    const res = await fetch(
+      `https://e-commerce-react-db.onrender.com/reviews/${_id}`,
+    );
+    const response = await res.json();
+    setReviews(response.reviews);
   };
   function changeActivePanel(index: number) {
     setActiveIndex(index);
@@ -84,20 +93,22 @@ function page() {
   function handleAddToCart(item: singleProductType) {
     dispatch(
       addToCart({
-        id: Number(item.id),
+        _id: item._id,
         title: item.title,
         price: item.price,
         images: item.images,
         rating: item.rating,
         discountPercentage: item.discountPercentage,
-        quantity: 1,
+        quantity: quantity, // ← ლოკალურად არჩეული რაოდენობა
       }),
     );
+    setQuantity(1);
   }
 
   useEffect(() => {
     fetchSingleProduct();
     fetchProductCards();
+    fetchReview();
   }, []);
   if (!singleProduct) return <Loader />;
   return (
@@ -168,7 +179,11 @@ function page() {
               <p>Tags</p>
               <div className={styles.tagContent}>
                 {singleProduct.tags.map((tag, index) => (
-                  <div className={styles.tagBox} key={index}>
+                  <div
+                    className={styles.tagBox}
+                    key={index}
+                    onClick={() => router.replace(`/products/category/${tag}`)}
+                  >
                     {tag}
                   </div>
                 ))}
@@ -177,9 +192,17 @@ function page() {
             <hr />
             <div className={styles.addToCart}>
               <div className={styles.cartQuantity}>
-                <button>-</button>
-                <span>1</span>
-                <button>+</button>
+                <button
+                  onClick={() => setQuantity((prev) => Math.max(prev - 1, 1))}
+                >
+                  -
+                </button>
+                <span>{quantity}</span>
+                <button
+                  onClick={() => setQuantity((prev) => Math.min(prev + 1, 10))}
+                >
+                  +
+                </button>
               </div>
               <button
                 className={styles.addToCartBtn}
@@ -221,13 +244,16 @@ function page() {
           {activeIndex === 1 && (
             <div className={styles.tabPanel}>
               <h3>
-                all reviews<span>({singleProduct.reviews.length})</span>
+                {reviews.length === 0
+                  ? "There are no reviews yet"
+                  : "all reviews"}
+                {reviews.length !== 0 ? <span>({reviews.length})</span> : null}
               </h3>
               <div className={styles.reviewContainer}>
-                {singleProduct.reviews.map((review, index) => (
+                {reviews.map((review, index) => (
                   <div key={index} className={styles.reviewCard}>
                     <StarRate ratingNumber={false} rating={review.rating} />
-                    <h4>{review.reviewerName}</h4>
+                    <h4>{review.userName}</h4>
                     <p>{review.comment}</p>
                     <span className={styles.postDate}>
                       Posted on {review.date}

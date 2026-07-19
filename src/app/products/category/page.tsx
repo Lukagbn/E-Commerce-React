@@ -14,20 +14,20 @@ function page() {
   const [starRate, setStarRate] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [aside, setAside] = useState(false);
-  const [appliedPrice, setAppliedPrice] = useState<number>(1000);
+  const [appliedPrice, setAppliedPrice] = useState<number>(10000);
   const [appliedStarRate, setAppliedStarRate] = useState<number>(0);
   const [appliedTitle, setAppliedTitle] = useState<string>("");
-  const [loadProducts, setLoadProducts] = useState(20);
+  const [loadProducts, setLoadProducts] = useState(9);
   const fetchCategoryProducts = async () => {
     const res = await fetch(
-      `https://dummyjson.com/products?limit=${loadProducts}`,
+      `https://e-commerce-react-db.onrender.com/products/?page=1&limit=${loadProducts}}`,
     );
     const result = await res.json();
     setCategoryProducts(result.products);
   };
   useEffect(() => {
     fetchCategoryProducts();
-  }, [loadProducts]);
+  }, [loadProducts, categoryProducts]);
   useEffect(() => {
     if (aside) {
       document.documentElement.style.overflow = "hidden";
@@ -66,7 +66,7 @@ function page() {
                 name="range"
                 id="range"
                 min={0}
-                max={1000}
+                max={10000}
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
               />
@@ -132,7 +132,7 @@ function page() {
             </div>
             <div className={styles.cardContainer}>
               {categoryProducts
-                ?.filter((product) => product.price <= appliedPrice)
+                .filter((products) => products.price <= appliedPrice)
                 .filter((product) => product.rating >= appliedStarRate)
                 .filter((product) =>
                   appliedTitle === ""
@@ -144,7 +144,7 @@ function page() {
                 .map((card, index) => (
                   <Card
                     key={index}
-                    id={card.id}
+                    _id={card._id}
                     title={card.title}
                     price={card.price}
                     rating={card.rating}
@@ -153,12 +153,14 @@ function page() {
                   />
                 ))}
             </div>
-            <button
-              className={styles.loadMoreBtn}
-              onClick={() => setLoadProducts(loadProducts + 20)}
-            >
-              Load More
-            </button>
+            {categoryProducts.length <= 9 ? (
+              <button
+                className={styles.loadMoreBtn}
+                onClick={() => setLoadProducts(loadProducts + 9)}
+              >
+                Load More
+              </button>
+            ) : null}
           </div>
         </div>
       </main>

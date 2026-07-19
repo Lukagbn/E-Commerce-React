@@ -11,22 +11,22 @@ function Navbar() {
   const NAV_LIST = [
     {
       title: "Shop",
-      href: "/products/categories",
+      href: "/products/category",
       className: "dropDown",
     },
     {
       title: "On Sale",
-      href: "/products/categories",
+      href: "/products/category",
       className: "",
     },
     {
       title: "New Arrivals",
-      href: "/products/categories",
+      href: "/products/category",
       className: "",
     },
     {
       title: "Bands",
-      href: "/products/categories",
+      href: "/products/category",
       className: "",
     },
   ];

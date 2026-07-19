@@ -24,12 +24,15 @@ function page() {
       localStorage.getItem("token") || sessionStorage.getItem("token");
 
     if (token) {
-      const res = await fetch("http://localhost:4000/auth/me", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        "https://e-commerce-react-db.onrender.com/auth/me",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       if (res.status === 401) {
         localStorage.clear();

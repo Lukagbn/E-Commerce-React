@@ -59,18 +59,19 @@ function page() {
         password: data.password,
         gender: false,
       };
-      const response = await fetch("http://localhost:4000/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://e-commerce-react-db.onrender.com//auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
         },
-        body: JSON.stringify(user),
-      });
+      );
       if (!response.ok) {
         console.log("error registering user!");
       }
-      console.log(user);
-      console.log(response);
       router.push("/login");
     } catch (error) {
       console.error("error", error);

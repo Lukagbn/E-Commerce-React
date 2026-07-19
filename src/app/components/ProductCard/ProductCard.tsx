@@ -18,19 +18,19 @@ function ProductCard({ className, title, cards }: productCard) {
         <div className={styles.newArrivalsContainer}>
           {cards?.map((item) => (
             <Card
-              id={item.id}
+              _id={item._id}
               title={item.title}
               price={item.price}
               images={item.images}
               rating={item.rating}
-              key={item.id}
+              key={item._id}
             />
           ))}
         </div>
       </div>
       <Link
         className={`${layout.innerContainer} ${styles.viewAll}`}
-        href={"/products/categories"}
+        href={"/products/category"}
       >
         View All
       </Link>

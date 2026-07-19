@@ -29,11 +29,14 @@ function page() {
   const [checked, setChecked] = useState(false);
   const handleLogIn = async (data: { email: string; password: string }) => {
     try {
-      const res = await fetch("http://localhost:4000/auth/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const res = await fetch(
+        "https://e-commerce-react-db.onrender.com//auth/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        },
+      );
 
       if (!res.ok) {
         setLoginError("Incorrect login information");

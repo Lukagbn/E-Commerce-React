@@ -13,7 +13,7 @@ import { deleteFromCart } from "@/lib/slices/cartSlice";
 import Link from "next/link";
 
 type cart = {
-  id: number;
+  _id: string;
   title: string;
   price: number;
   images: string[];
@@ -28,12 +28,12 @@ function page() {
   const totalPrice = useAppSelector(cartTotalPrice);
   const totalDiscountPrice = useAppSelector(cartTotalDiscountPrice);
   function handleIncrease(card: cart) {
-    dispatch(addToCart(card));
+    dispatch(addToCart({ ...card, quantity: 1 }));
   }
   function handleDecrease(card: cart) {
     dispatch(decreaseQuantity(card));
   }
-  function handleDelete(itemId: number) {
+  function handleDelete(itemId: string) {
     dispatch(deleteFromCart(itemId));
   }
   if (cartProducts.length === 0) {
@@ -41,7 +41,7 @@ function page() {
       <div className={styles.emptyCart}>
         <p>Your cart is empty</p>
 
-        <Link href={"/products/categories"}>Browse products</Link>
+        <Link href={"/products/category"}>Browse products</Link>
       </div>
     );
   }
@@ -52,9 +52,9 @@ function page() {
         <div className={styles.cartContainer}>
           <div className={styles.cardContainer}>
             {cartProducts.map((card) => (
-              <div key={card.id} className={styles.card}>
+              <div key={card._id} className={styles.card}>
                 <div className={styles.cardHeader}>
-                  <Link href={`/products/details/${card.id}`}>
+                  <Link href={`/products/details/${card._id}`}>
                     <Image
                       src={card.images[0]}
                       width={99}
@@ -66,7 +66,7 @@ function page() {
                 <div className={styles.cardBody}>
                   <div className={styles.titleWrapper}>
                     <h4>{card.title}</h4>
-                    <span onClick={() => handleDelete(card.id)}>
+                    <span onClick={() => handleDelete(card._id)}>
                       <svg
                         width="20"
                         height="20"

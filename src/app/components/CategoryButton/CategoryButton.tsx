@@ -8,7 +8,7 @@ type categoryBtn = {
 function CategoryButton({ route }: categoryBtn) {
   return (
     <button className={styles.btn}>
-      <Link href={`/products/categories/${route}`}>{route}</Link>
+      <Link href={`/products/category/${route}`}>{route}</Link>
     </button>
   );
 }

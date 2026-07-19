@@ -4,7 +4,7 @@ import Link from "next/link";
 import StarRate from "../StarRate/StarRate";
 
 export type CardProps = {
-  id: number;
+  _id: string;
   title: string;
   price: number;
   rating: number;
@@ -12,10 +12,10 @@ export type CardProps = {
   className?: string;
 };
 
-function Card({ id, title, price, rating, images, className }: CardProps) {
+function Card({ _id, title, price, rating, images, className }: CardProps) {
   return (
     <div className={`${styles.card} ${className}`}>
-      <Link href={`/products/details/${id}`}>
+      <Link href={`/products/details/${_id}`}>
         <Image
           src={images[0]}
           alt="product"
@@ -25,7 +25,7 @@ function Card({ id, title, price, rating, images, className }: CardProps) {
         />
       </Link>
       <p>{title}</p>
-      <StarRate ratingNumber={true} rating={rating} />
+      <StarRate ratingNumber={true} rating={rating ?? 0} />
       <h3>${price}</h3>
     </div>
   );

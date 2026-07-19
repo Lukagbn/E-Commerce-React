@@ -109,15 +109,22 @@
   .filterApplyBtn {
     margin-top: 24px;
     height: 48px;
-    background-color: #000000;
-    color: #ffff;
     font-size: 14px;
     font-weight: 500;
     width: 100%;
     border-radius: 62px;
-    border: none;
     outline: none;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
+    color: black;
+    background-color: #fbf9f9;
+    border: 1px solid black;
+    box-shadow: 4px 7px 0px 1px #000000;
+    &:hover {
+      background-color: #000000;
+      color: #ffff;
+      box-shadow: 0px 0px 0px 0px;
+    }
   }
 }
 .aside {
