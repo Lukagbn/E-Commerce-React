@@ -30,7 +30,7 @@ function page() {
   const handleLogIn = async (data: { email: string; password: string }) => {
     try {
       const res = await fetch(
-        "https://e-commerce-react-db.onrender.com//auth/",
+        "https://e-commerce-react-db.onrender.com/auth/",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

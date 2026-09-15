@@ -60,7 +60,7 @@ function page() {
         gender: false,
       };
       const response = await fetch(
-        "https://e-commerce-react-db.onrender.com//auth/register",
+        "https://e-commerce-react-db.onrender.com/auth/register",
         {
           method: "POST",
           headers: {
