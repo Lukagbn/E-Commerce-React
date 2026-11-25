@@ -2,32 +2,62 @@
 import Image from "next/image";
 import layout from "./layout.module.scss";
 import styles from "./page.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import ProductCard from "./components/ProductCard/ProductCard";
 import { CardProps } from "./components/Card/Card";
 import Reviews from "./components/Reviews/Reviews";
 
-function page() {
+function Page() {
   const [arrivals, setArrivals] = useState<CardProps[] | null>(null);
   const [topSelling, settopSelling] = useState<CardProps[] | null>(null);
+  const [arrivalsError, setArrivalsError] = useState(false);
+  const [topSellingError, setTopSellingError] = useState(false);
 
-  const arrivalfetch = async () => {
-    const arrivalsResponse = await fetch(
-      `https://e-commerce-react-db.onrender.com/products?page=1&limit=4`,
-    );
-    const arrivalsData = await arrivalsResponse.json();
-    const topSellingResponse = await fetch(
-      `https://e-commerce-react-db.onrender.com/products?page=2&limit=4`,
-    );
-    const topSellingData = await topSellingResponse.json();
+  async function topSellingFetch() {
+    try {
+      const res = await fetch(
+        `https://e-commerce-react-db.onrender.com/products?page=2&limit=4`,
+      );
+      if (!res.ok) {
+        throw new Error(`Top-selling request failed with status ${res.status}`);
+      }
 
-    setArrivals(arrivalsData.products);
-    settopSelling(topSellingData.products);
-  };
+      const response = await res.json();
+      if (!Array.isArray(response.products)) {
+        throw new Error("Top-selling response did not contain a products list");
+      }
+
+      settopSelling(response.products);
+    } catch (error) {
+      console.error("Failed to load top-selling products:", error);
+      setTopSellingError(true);
+    }
+  }
+  async function arrivalfetch() {
+    try {
+      const res = await fetch(
+        `https://e-commerce-react-db.onrender.com/products?page=1&limit=4`,
+      );
+      if (!res.ok) {
+        throw new Error(`New-arrivals request failed with status ${res.status}`);
+      }
+
+      const response = await res.json();
+      if (!Array.isArray(response.products)) {
+        throw new Error("New-arrivals response did not contain a products list");
+      }
+
+      setArrivals(response.products);
+    } catch (error) {
+      console.error("Failed to load new-arrivals products:", error);
+      setArrivalsError(true);
+    }
+  }
 
   useEffect(() => {
     arrivalfetch();
+    topSellingFetch();
   }, []);
   return (
     <main className={layout.container}>
@@ -103,13 +133,18 @@ function page() {
           alt="calvin klein"
         ></Image>
       </section>
-      <ProductCard title="new arrivals" cards={arrivals} />
+      <ProductCard
+        title="new arrivals"
+        cards={arrivals}
+        error={arrivalsError}
+      />
       <section className={`${styles.horizontalLine} ${layout.innerContainer}`}>
         <hr />
       </section>
       <ProductCard
         title="top selling"
         cards={topSelling}
+        error={topSellingError}
         className={styles.topSelling}
       />
       <section
@@ -176,4 +211,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

@@ -19,6 +19,7 @@ interface ReviewApiResponse {
 function Reviews() {
   const [leftArrowHover, setLeftArrowHover] = useState<boolean>(false);
   const [rightArrowHover, setRightArrowHover] = useState<boolean>(false);
+  const [serverError, setServerError] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
 
@@ -27,6 +28,9 @@ function Reviews() {
       const res = await fetch(
         "https://e-commerce-react-db.onrender.com/reviews/top",
       );
+      if (res.status === 500) {
+        setServerError(true);
+      }
       const response: ReviewApiResponse = await res.json();
       setReviews(response.allReviews);
     } catch (error) {
@@ -67,6 +71,10 @@ function Reviews() {
   useEffect(() => {
     fetchReviews();
   }, []);
+
+  if (serverError) {
+    return <h2>Something went wrong, Please try again!</h2>;
+  }
 
   return (
     <section className={`${styles.feedBack} ${layout.innerContainer}`}>

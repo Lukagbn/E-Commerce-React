@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Card.module.scss";
+import styles from "./CardLoader.module.scss";
 
-function Card() {
+function CardLoader() {
   return (
     <div className={styles.card}>
       <div className={styles.image}></div>
@@ -14,4 +14,4 @@ function Card() {
   );
 }
 
-export default Card;
+export default CardLoader;

@@ -23,6 +23,11 @@
   gap: 14px;
   max-width: 390px;
 }
+.feedbackMessage {
+  grid-column: 1 / -1;
+  justify-self: center;
+  text-align: center;
+}
 .overlay {
   position: absolute;
   width: 100%;
