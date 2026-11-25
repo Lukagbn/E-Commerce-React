@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Card, { CardProps } from "@/app/components/Card/Card";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
-import Loader from "@/app/components/Loader/Loader";
 import CategoryGroup from "@/app/components/CategoryGroup/CategoryGroup";
+import CardLoader from "@/app/components/Skeletons/CardLoader/CardLoader";
 
-function page() {
+function Page() {
   const { slug } = useParams();
   const [categoryProducts, setCategoryProducts] = useState<CardProps[] | null>(
     null,
@@ -19,16 +19,46 @@ function page() {
   const [appliedPrice, setAppliedPrice] = useState<number>(10000);
   const [appliedStarRate, setAppliedStarRate] = useState<number>(0);
   const [appliedTitle, setAppliedTitle] = useState<string>("");
-  const fetchCategoryProducts = async () => {
-    const res = await fetch(
-      `https://e-commerce-react-db.onrender.com/products/category/${slug}`,
-    );
-    const result = await res.json();
-    setCategoryProducts(result.products);
-  };
+  const [serverError, setServerError] = useState(false);
+  const [loadProducts, setLoadProducts] = useState(9);
+
   useEffect(() => {
+    let cancelled = false;
+
+    const fetchCategoryProducts = async () => {
+      setCategoryProducts(null);
+      setServerError(false);
+
+      try {
+        const res = await fetch(
+          `https://e-commerce-react-db.onrender.com/products/category/${slug}`,
+        );
+
+        if (!res.ok) {
+          throw new Error(`Category request failed with status ${res.status}`);
+        }
+
+        const result = await res.json();
+        if (!Array.isArray(result.products)) {
+          throw new Error("Category response did not contain a products list");
+        }
+
+        if (!cancelled) {
+          setCategoryProducts(result.products);
+        }
+      } catch (error) {
+        console.error("Failed to load category products:", error);
+        if (!cancelled) {
+          setServerError(true);
+        }
+      }
+    };
+
     fetchCategoryProducts();
-  }, []);
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
   useEffect(() => {
     if (aside) {
       document.documentElement.style.overflow = "hidden";
@@ -36,7 +66,16 @@ function page() {
       document.documentElement.style.overflow = "";
     }
   }, [aside]);
-  if (!categoryProducts) return <Loader />;
+
+  const filteredProducts = (categoryProducts ?? [])
+    .filter((product) => product.price <= appliedPrice)
+    .filter((product) => product.rating >= appliedStarRate)
+    .filter((product) =>
+      appliedTitle === ""
+        ? true
+        : product.title.toLowerCase().includes(appliedTitle.toLowerCase()),
+    );
+
   return (
     <>
       <div
@@ -132,27 +171,40 @@ function page() {
               </button>
             </div>
             <div className={styles.cardContainer}>
-              {categoryProducts
-                ?.filter((product) => product.price <= appliedPrice)
-                .filter((product) => product.rating <= appliedStarRate)
-                .filter((product) =>
-                  appliedTitle === ""
-                    ? true
-                    : product.title
-                        .toLowerCase()
-                        .includes(appliedTitle.toLowerCase()),
-                )
-                .map((card, index) => (
+              {serverError ? (
+                <p className={styles.feedbackMessage}>
+                  Something went wrong, Please try again!
+                </p>
+              ) : categoryProducts === null ? (
+                Array.from({ length: 9 }).map((_, index) => (
+                  <CardLoader key={index} />
+                ))
+              ) : filteredProducts.length === 0 ? (
+                <p className={styles.feedbackMessage}>No products found</p>
+              ) : (
+                filteredProducts.map((card) => (
                   <Card
-                    key={index}
+                    key={card._id}
                     _id={card._id}
                     title={card.title}
                     price={card.price}
                     rating={card.rating}
                     images={card.images}
+                    className={styles.categoryCard}
                   />
-                ))}
+                ))
+              )}
             </div>
+            {!serverError &&
+              categoryProducts !== null &&
+              categoryProducts.length >= loadProducts && (
+                <button
+                  className={styles.loadMoreBtn}
+                  onClick={() => setLoadProducts((prev) => prev + 9)}
+                >
+                  Load More
+                </button>
+              )}
           </div>
         </div>
       </main>
@@ -160,4 +212,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

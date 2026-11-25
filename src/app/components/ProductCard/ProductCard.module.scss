@@ -40,6 +40,10 @@
     overflow-x: auto;
     width: 100%;
     scrollbar-width: none;
+    .feedbackMessage {
+      margin-top: 32px;
+      text-align: center;
+    }
     .newArrivalsContainer {
       display: flex;
       gap: 16px;

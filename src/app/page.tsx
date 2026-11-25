@@ -2,81 +2,62 @@
 import Image from "next/image";
 import layout from "./layout.module.scss";
 import styles from "./page.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import StarRate from "./components/StarRate/StarRate";
 import ProductCard from "./components/ProductCard/ProductCard";
 import { CardProps } from "./components/Card/Card";
-import Loader from "./components/Loader/Loader";
-import LeftArrow from "./components/Arrows/LeftArrow";
-import RightArrow from "./components/Arrows/RightArrow";
+import Reviews from "./components/Reviews/Reviews";
 
-type reviewsType = {
-  id: number;
-  reviews: string[];
-};
-type Review = {
-  reviewerName: string;
-  comment: string;
-  userName: string;
-  rating: number;
-};
-function page() {
+function Page() {
   const [arrivals, setArrivals] = useState<CardProps[] | null>(null);
   const [topSelling, settopSelling] = useState<CardProps[] | null>(null);
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [leftArrowHover, setLeftArrowHover] = useState<boolean>(false);
-  const [rightArrowHover, setRightArrowHover] = useState<boolean>(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const arrivalfetch = async () => {
-    const arrivalsResponse = await fetch(
-      `https://e-commerce-react-db.onrender.com/products?page=1&limit=4`,
-    );
-    const arrivalsData = await arrivalsResponse.json();
-    const topSellingResponse = await fetch(
-      `https://e-commerce-react-db.onrender.com/products?page=2&limit=4`,
-    );
-    const topSellingData = await topSellingResponse.json();
-    const reviewResponse = await fetch(
-      "https://e-commerce-react-db.onrender.com/reviews/top",
-    );
-    const reviewData = await reviewResponse.json();
+  const [arrivalsError, setArrivalsError] = useState(false);
+  const [topSellingError, setTopSellingError] = useState(false);
 
-    setReviews(reviewData.allReviews);
-    setArrivals(arrivalsData.products);
-    settopSelling(topSellingData.products);
-  };
-  function scrollLeft() {
-    if (!containerRef.current) return;
-    const isAtStart = containerRef.current.scrollLeft === 0;
-    if (isAtStart) {
-      containerRef.current.scrollTo({
-        left: containerRef.current.scrollWidth,
-        behavior: "smooth",
-      });
-    } else {
-      containerRef.current.scrollBy({
-        left: -500,
-        behavior: "smooth",
-      });
+  async function topSellingFetch() {
+    try {
+      const res = await fetch(
+        `https://e-commerce-react-db.onrender.com/products?page=2&limit=4`,
+      );
+      if (!res.ok) {
+        throw new Error(`Top-selling request failed with status ${res.status}`);
+      }
+
+      const response = await res.json();
+      if (!Array.isArray(response.products)) {
+        throw new Error("Top-selling response did not contain a products list");
+      }
+
+      settopSelling(response.products);
+    } catch (error) {
+      console.error("Failed to load top-selling products:", error);
+      setTopSellingError(true);
     }
   }
-  function scrollRight() {
-    if (!containerRef.current) return;
-    const isAtEnd =
-      containerRef.current.scrollLeft + containerRef.current?.offsetWidth >=
-      containerRef.current.scrollWidth;
-    if (isAtEnd) {
-      containerRef.current.scrollTo({
-        left: -containerRef.current.scrollWidth,
-        behavior: "smooth",
-      });
-    } else {
-      containerRef.current.scrollBy({ left: 500, behavior: "smooth" });
+  async function arrivalfetch() {
+    try {
+      const res = await fetch(
+        `https://e-commerce-react-db.onrender.com/products?page=1&limit=4`,
+      );
+      if (!res.ok) {
+        throw new Error(`New-arrivals request failed with status ${res.status}`);
+      }
+
+      const response = await res.json();
+      if (!Array.isArray(response.products)) {
+        throw new Error("New-arrivals response did not contain a products list");
+      }
+
+      setArrivals(response.products);
+    } catch (error) {
+      console.error("Failed to load new-arrivals products:", error);
+      setArrivalsError(true);
     }
   }
+
   useEffect(() => {
     arrivalfetch();
+    topSellingFetch();
   }, []);
   return (
     <main className={layout.container}>
@@ -152,13 +133,18 @@ function page() {
           alt="calvin klein"
         ></Image>
       </section>
-      <ProductCard title="new arrivals" cards={arrivals} />
+      <ProductCard
+        title="new arrivals"
+        cards={arrivals}
+        error={arrivalsError}
+      />
       <section className={`${styles.horizontalLine} ${layout.innerContainer}`}>
         <hr />
       </section>
       <ProductCard
         title="top selling"
         cards={topSelling}
+        error={topSellingError}
         className={styles.topSelling}
       />
       <section
@@ -220,46 +206,9 @@ function page() {
           </div>
         </div>
       </section>
-      <section className={`${styles.feedBack} ${layout.innerContainer}`}>
-        <div className={styles.feedBackContainer}>
-          <div className={styles.feedBackHeaderWrapper}>
-            <h3>
-              OUR HAPPY <span>CUSTOMERS</span>
-            </h3>
-            <div className={styles.feedBackBtnContainer}>
-              <button
-                className={styles.arrowBtn}
-                onClick={() => scrollLeft()}
-                onMouseEnter={() => setLeftArrowHover(true)}
-                onMouseLeave={() => setLeftArrowHover(false)}
-                aria-label="left arrow button"
-              >
-                <LeftArrow hovered={leftArrowHover} />
-              </button>
-              <button
-                className={styles.arrowBtn}
-                onClick={() => scrollRight()}
-                onMouseEnter={() => setRightArrowHover(true)}
-                onMouseLeave={() => setRightArrowHover(false)}
-                aria-label="right arrow button"
-              >
-                <RightArrow hovered={rightArrowHover} />
-              </button>
-            </div>
-          </div>
-          <div className={styles.reviewsWrapper} ref={containerRef}>
-            {reviews.map((review, index) => (
-              <div key={index} className={styles.reviewCard}>
-                <StarRate ratingNumber={false} rating={review.rating} />
-                <h3>{review.userName} </h3>
-                <p>"{review.comment}"</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Reviews />
     </main>
   );
 }
 
-export default page;
+export default Page;

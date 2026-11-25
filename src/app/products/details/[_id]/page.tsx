@@ -37,7 +37,7 @@ interface singleProductType extends reviewsType {
   createdAt?: Date;
   reviews: reviewsType[];
 }
-function page() {
+function Page() {
   const { _id } = useParams();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -45,6 +45,7 @@ function page() {
     null,
   );
   const [cardProducts, setcardProducts] = useState<CardProps[] | null>(null);
+  const [cardProductsError, setCardProductsError] = useState(false);
   const [activeImage, setActiveImage] = useState<number>(2);
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const [quantity, setQuantity] = useState<number>(1);
@@ -74,11 +75,24 @@ function page() {
     setSingleProduct(result.product);
   };
   const fetchProductCards = async () => {
-    const res = await fetch(
-      "https://e-commerce-react-db.onrender.com/products?page=1&limit=4",
-    );
-    const result = await res.json();
-    setcardProducts(result.products);
+    try {
+      const res = await fetch(
+        "https://e-commerce-react-db.onrender.com/products?page=1&limit=4",
+      );
+      if (!res.ok) {
+        throw new Error(`Top-selling request failed with status ${res.status}`);
+      }
+
+      const result = await res.json();
+      if (!Array.isArray(result.products)) {
+        throw new Error("Top-selling response did not contain a products list");
+      }
+
+      setcardProducts(result.products);
+    } catch (error) {
+      console.error("Failed to load top-selling products:", error);
+      setCardProductsError(true);
+    }
   };
   const fetchReview = async () => {
     const res = await fetch(
@@ -270,9 +284,13 @@ function page() {
           )}
         </div>
       </section>
-      <ProductCard title="top selling" cards={cardProducts} />
+      <ProductCard
+        title="top selling"
+        cards={cardProducts}
+        error={cardProductsError}
+      />
     </main>
   );
 }
 
-export default page;
+export default Page;

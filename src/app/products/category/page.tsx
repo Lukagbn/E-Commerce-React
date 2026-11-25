@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import Card, { CardProps } from "@/app/components/Card/Card";
 import styles from "./page.module.scss";
 import layout from "@/app/layout.module.scss";
-import Loader from "@/app/components/Loader/Loader";
-import CategoriesGrpoup from "@/app/components/CategoryGroup/CategoryGroup";
+import CategoriesGroup from "@/app/components/CategoryGroup/CategoryGroup";
+import CardLoader from "@/app/components/Skeletons/CardLoader/CardLoader";
 
-function page() {
+function Page() {
   const [categoryProducts, setCategoryProducts] = useState<CardProps[] | null>(
     null,
   );
@@ -17,17 +17,53 @@ function page() {
   const [appliedPrice, setAppliedPrice] = useState<number>(10000);
   const [appliedStarRate, setAppliedStarRate] = useState<number>(0);
   const [appliedTitle, setAppliedTitle] = useState<string>("");
+  const [serverError, setServerError] = useState<boolean>(false);
   const [loadProducts, setLoadProducts] = useState(9);
-  const fetchCategoryProducts = async () => {
-    const res = await fetch(
-      `https://e-commerce-react-db.onrender.com/products/?page=1&limit=${loadProducts}}`,
+
+  const filteredProducts = (categoryProducts ?? [])
+    .filter((product) => product.price <= appliedPrice)
+    .filter((product) => product.rating >= appliedStarRate)
+    .filter((product) =>
+      appliedTitle === ""
+        ? true
+        : product.title.toLowerCase().includes(appliedTitle.toLowerCase()),
     );
-    const result = await res.json();
-    setCategoryProducts(result.products);
-  };
+
   useEffect(() => {
+    let cancelled = false;
+    setServerError(false);
+
+    const fetchCategoryProducts = async () => {
+      try {
+        const res = await fetch(
+          `https://e-commerce-react-db.onrender.com/products/?page=1&limit=${loadProducts}`,
+        );
+
+        if (!res.ok) {
+          throw new Error(`Products request failed with status ${res.status}`);
+        }
+
+        const result = await res.json();
+        if (!Array.isArray(result.products)) {
+          throw new Error("Products response did not contain a products list");
+        }
+
+        if (!cancelled) {
+          setCategoryProducts(result.products);
+        }
+      } catch (error) {
+        console.error("Failed to load products:", error);
+        if (!cancelled) {
+          setServerError(true);
+        }
+      }
+    };
+
     fetchCategoryProducts();
-  }, [loadProducts, categoryProducts]);
+    return () => {
+      cancelled = true;
+    };
+  }, [loadProducts]);
   useEffect(() => {
     if (aside) {
       document.documentElement.style.overflow = "hidden";
@@ -35,7 +71,7 @@ function page() {
       document.documentElement.style.overflow = "";
     }
   }, [aside]);
-  if (!categoryProducts) return <Loader />;
+
   return (
     <>
       <div
@@ -97,7 +133,7 @@ function page() {
               />
             </div>
             <hr />
-            <CategoriesGrpoup />
+            <CategoriesGroup />
             <hr />
             <button
               className={styles.filterApplyBtn}
@@ -131,19 +167,20 @@ function page() {
               </button>
             </div>
             <div className={styles.cardContainer}>
-              {categoryProducts
-                .filter((products) => products.price <= appliedPrice)
-                .filter((product) => product.rating >= appliedStarRate)
-                .filter((product) =>
-                  appliedTitle === ""
-                    ? true
-                    : product.title
-                        .toLowerCase()
-                        .includes(appliedTitle.toLowerCase()),
-                )
-                .map((card, index) => (
+              {serverError ? (
+                <p className={styles.feedbackMessage}>
+                  Something went wrong, Please try again!
+                </p>
+              ) : categoryProducts === null ? (
+                Array.from({ length: 9 }).map((_, index) => (
+                  <CardLoader key={index} />
+                ))
+              ) : filteredProducts.length === 0 ? (
+                <p className={styles.feedbackMessage}>No products found</p>
+              ) : (
+                filteredProducts.map((card) => (
                   <Card
-                    key={index}
+                    key={card._id}
                     _id={card._id}
                     title={card.title}
                     price={card.price}
@@ -151,16 +188,19 @@ function page() {
                     images={card.images}
                     className={styles.categoryCard}
                   />
-                ))}
+                ))
+              )}
             </div>
-            {categoryProducts.length <= 9 ? (
-              <button
-                className={styles.loadMoreBtn}
-                onClick={() => setLoadProducts(loadProducts + 9)}
-              >
-                Load More
-              </button>
-            ) : null}
+            {!serverError &&
+              categoryProducts !== null &&
+              categoryProducts.length >= loadProducts && (
+                <button
+                  className={styles.loadMoreBtn}
+                  onClick={() => setLoadProducts((prev) => prev + 9)}
+                >
+                  Load More
+                </button>
+              )}
           </div>
         </div>
       </main>
@@ -168,4 +208,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
