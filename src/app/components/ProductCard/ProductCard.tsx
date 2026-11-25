@@ -12,41 +12,25 @@ type productCard = {
 };
 
 function ProductCard({ className, title, cards }: productCard) {
-  if (!cards)
-    return (
-      <section className={`${styles.newArrivals} ${className}`}>
-        <h2>{title}</h2>
-        <div className={styles.newArrivalsWrapper}>
-          <div className={styles.newArrivalsContainer}>
-            {Array.from({ length: 4 }).map((_, index) => (
-              <CardLoader key={index} />
-            ))}
-          </div>
-        </div>
-        <Link
-          className={`${layout.innerContainer} ${styles.viewAll}`}
-          href={"/products/category"}
-        >
-          View All
-        </Link>
-      </section>
-    );
-
   return (
     <section className={`${styles.newArrivals} ${className}`}>
       <h2>{title}</h2>
       <div className={styles.newArrivalsWrapper}>
         <div className={styles.newArrivalsContainer}>
-          {cards?.map((item) => (
-            <Card
-              _id={item._id}
-              title={item.title}
-              price={item.price}
-              images={item.images}
-              rating={item.rating}
-              key={item._id}
-            />
-          ))}
+          {cards !== null
+            ? cards?.map((item) => (
+                <Card
+                  _id={item._id}
+                  title={item.title}
+                  price={item.price}
+                  images={item.images}
+                  rating={item.rating}
+                  key={item._id}
+                />
+              ))
+            : Array.from({ length: 4 }).map((_, index) => (
+                <CardLoader key={index} />
+              ))}
         </div>
       </div>
       <Link
