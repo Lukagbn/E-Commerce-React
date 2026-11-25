@@ -1,0 +1,64 @@
+@use "../../animations.module" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 371px;
+  flex-shrink: 0;
+
+  @media (min-width: 1400px) {
+    max-width: 295px;
+  }
+  .image {
+    width: 100%;
+    height: 298px;
+    background-color: #f0eeed;
+    border-radius: 13.42px;
+    @include skeleton-pulse;
+    @media (min-width: 1400px) {
+      width: 295px;
+      height: 298px;
+    }
+  }
+
+  .body {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      margin-top: 4px;
+      width: 120px;
+      height: 11px;
+      background-color: #000000;
+      border-radius: 10px;
+      @include skeleton-pulse;
+
+      @media (min-width: 1400px) {
+        height: 14px;
+      }
+    }
+    .stars {
+      color: gold;
+      font-size: 20px;
+      @include skeleton-pulse;
+
+      @media (min-width: 1400px) {
+        height: 25px;
+      }
+    }
+    .price {
+      margin-top: 4px;
+      width: 120px;
+      height: 20px;
+      background-color: #000000;
+      border-radius: 24.3px;
+      @include skeleton-pulse;
+
+      @media (min-width: 1400px) {
+        height: 24px;
+      }
+    }
+  }
+}
