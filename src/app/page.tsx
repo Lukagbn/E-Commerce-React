@@ -78,9 +78,6 @@ function page() {
   useEffect(() => {
     arrivalfetch();
   }, []);
-  if (!arrivals) {
-    return <Loader />;
-  }
   return (
     <main className={layout.container}>
       <link
